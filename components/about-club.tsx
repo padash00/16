@@ -96,8 +96,8 @@ const AboutClub: React.FC = () => {
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.5, delay: 0.3 }}
         >
-          <AnimatedCounter end={10000} duration={2000} label="Счастливых геймеров" />
-          <AnimatedCounter end={500} duration={2000} label="Эпических турниров" />
+          <AnimatedCounter end={100000} duration={2000} label="Счастливых геймеров" />
+          <AnimatedCounter end={2} duration={2000} label="Эпических турниров" />
           <AnimatedCounter end={24} duration={2000} label="Часа драйва ежедневно" />
           <AnimatedCounter end={65} duration={2000} label="Боевых машин" />
         </motion.div>
