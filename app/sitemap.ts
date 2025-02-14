@@ -1,28 +1,54 @@
 import { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://www.f16-arena.kz' // Замените на ваш домен
-
   return [
     {
-      url: baseUrl,
+      url: 'https://www.f16-arena.kz',
       lastModified: new Date(),
+      changeFrequency: 'daily',
+      priority: 1,
     },
     {
-      url: `${baseUrl}#zones`,
+      url: 'https://www.f16-arena.kz#zones',
       lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.8,
     },
     {
-      url: `${baseUrl}#pricing`,
+      url: 'https://www.f16-arena.kz#pricing',
       lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.8,
     },
     {
-      url: `${baseUrl}#gallery`,
+      url: 'https://www.f16-arena.kz#gallery',
       lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.7,
     },
     {
-      url: `${baseUrl}#contacts`,
+      url: 'https://www.f16-arena.kz#events',
       lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
+    {
+      url: 'https://www.f16-arena.kz#testimonials',
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.6,
+    },
+    {
+      url: 'https://www.f16-arena.kz#faq',
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: 'https://www.f16-arena.kz#contacts',
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.9,
     },
   ]
 }
