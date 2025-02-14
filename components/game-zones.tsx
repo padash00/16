@@ -50,7 +50,7 @@ const zones = [
     gpu: "RTX 4060 Ti",
     monitor: "360Hz",
     headset: "HyperX Cloud 2",
-    mouse: "Logitech G PRO, Dark Project",
+    mouse: "Logitech G PRO",
     description: "Преодолей все границы с RTX 4060 Ti и 360Hz монитором. Здесь рождаются легенды киберспорта.",
     image:
       "https://images.unsplash.com/photo-1600861194942-f883de0dfe96?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80",
@@ -62,7 +62,7 @@ const zones = [
     gpu: "RTX 4070 Super",
     monitor: "540Hz",
     headset: "Logitech G PRO 2",
-    mouse: "Logitech Superlight 2, Varmilo",
+    mouse: "Logitech Superlight 2",
     description:
       "Элитная зона для профессионалов. Непревзойденная мощь RTX 4070 Super и молниеносный 540Hz монитор. Здесь куются чемпионы.",
     image:
