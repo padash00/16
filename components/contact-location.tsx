@@ -76,8 +76,8 @@ export default function ContactLocation() {
               <h4 className="font-orbitron text-xl font-semibold mb-4 text-neon-green">Мы в социальных сетях</h4>
               <div className="flex flex-wrap gap-4">
                 <SocialLink href="https://instagram.com/f16arena_" icon={Instagram} label="Instagram" />
-                <SocialLink href="https://www.youtube.com/@F16arena" icon={Facebook} label="Youtube" />
-                <SocialLink href="https://api.whatsapp.com/send/?phone=77080161720&text&type=phone_number&app_absent=0" icon={Twitch} label="WhatsApp" />
+                <SocialLink href="https://www.youtube.com/@F16arena" icon={Youtube} label="Youtube" />
+                <SocialLink href="https://api.whatsapp.com/send/?phone=77080161720&text&type=phone_number&app_absent=0" icon={whatsapp} label="WhatsApp" />
               </div>
             </div>
 
