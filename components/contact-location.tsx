@@ -62,22 +62,22 @@ export default function ContactLocation() {
             <ContactItem icon={MapPin}>г. Усть-Каменогорск, ул. 30 гвардейской дивизии 24/1, 1 этаж</ContactItem>
             <ContactItem icon={Phone}>
               <Link href="tel:+77080161720" className="hover:text-neon-green transition-colors duration-300">
-                8 708 016 1720
+                +7 (708) 016 17 20
               </Link>
             </ContactItem>
             <ContactItem icon={Clock}>Работаем 24/7</ContactItem>
             <ContactItem icon={Mail}>
               <Link href="mailto:info@f16arena.kz" className="hover:text-neon-green transition-colors duration-300">
-                info@f16arena.kz
+                fog_fog@internet.ru
               </Link>
             </ContactItem>
 
             <div className="mt-8">
               <h4 className="font-orbitron text-xl font-semibold mb-4 text-neon-green">Мы в социальных сетях</h4>
               <div className="flex flex-wrap gap-4">
-                <SocialLink href="https://instagram.com/f16arena" icon={Instagram} label="Instagram" />
-                <SocialLink href="https://facebook.com/f16arena" icon={Facebook} label="Facebook" />
-                <SocialLink href="https://twitch.tv/f16arena" icon={Twitch} label="Twitch" />
+                <SocialLink href="https://instagram.com/f16arena_" icon={Instagram} label="Instagram" />
+                <SocialLink href="https://www.youtube.com/@F16arena" icon={Facebook} label="Youtube" />
+                <SocialLink href="https://api.whatsapp.com/send/?phone=77080161720&text&type=phone_number&app_absent=0" icon={Twitch} label="WhatsApp" />
               </div>
             </div>
 
