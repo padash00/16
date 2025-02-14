@@ -312,7 +312,6 @@ h6 {
   overflow: hidden;
   z-index: -1;
 }
-
 .matrix-background::before {
   content: "";
   position: absolute;
