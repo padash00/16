@@ -1,33 +1,33 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import Link from "next/link"
-import { Menu, X } from 'lucide-react'
-import { motion, AnimatePresence } from "framer-motion"
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { Menu, X } from 'lucide-react';
+import { motion, AnimatePresence } from "framer-motion";
 
 const navItems = [
   { name: "Зоны", href: "#zones" },
   { name: "Тарифы", href: "#pricing" },
   { name: "Галерея", href: "#gallery" },
   { name: "Контакты", href: "#contacts" },
-]
+];
 
 export default function Navigation() {
-  const [isScrolled, setIsScrolled] = useState(false)
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
-    }
+      setIsScrolled(window.scrollY > 50);
+    };
 
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const closeMenu = () => {
-    setIsMenuOpen(false)
-  }
+    setIsMenuOpen(false);
+  };
 
   return (
     <motion.nav
@@ -122,5 +122,5 @@ export default function Navigation() {
         )}
       </AnimatePresence>
     </motion.nav>
-  )
+  );
 }
