@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import { Inter, Oswald, Rajdhani, Orbitron, Play } from 'next/font/google'
+import localFont from 'next/font/local'
 import Navigation from "../components/navigation"
 import "./globals.css"
 
@@ -17,6 +18,11 @@ const play = Play({
   variable: "--font-play" 
 })
 
+const accid = localFont({
+  src: '../public/fonts/accid.ttf',
+  variable: '--font-accid'
+})
+
 export const metadata: Metadata = {
   title: "F16 Arena - Киберспортивный клуб в Усть-Каменогорске",
   description: "Максимальная мощность – максимум побед! Киберспортивный клуб F16 Arena в Усть-Каменогорске.",
@@ -26,7 +32,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="ru"
-      className={`${inter.variable} ${oswald.variable} ${rajdhani.variable} ${orbitron.variable} ${play.variable}`}
+      className={`${inter.variable} ${oswald.variable} ${rajdhani.variable} ${orbitron.variable} ${play.variable} ${accid.variable}`}
     >
       <body className="font-inter bg-dark-bg text-white">
         <Navigation />
