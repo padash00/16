@@ -17,6 +17,7 @@ module.exports = {
         inter: ["var(--font-inter)"],
         orbitron: ["var(--font-orbitron)"],
         play: ["var(--font-play)"],
+        accid: ["var(--font-accid)"],
       },
       colors: {
         "neon-green": "#cde901",
@@ -67,4 +68,3 @@ module.exports = {
   },
   plugins: [require("tailwindcss-animate")],
 }
-
