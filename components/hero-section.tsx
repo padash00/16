@@ -13,7 +13,7 @@ const HeroSection: React.FC = () => {
     <section className="relative h-screen flex items-center justify-center overflow-hidden">
       <motion.div className="absolute inset-0 z-0" style={{ y }}>
         <Image
-          src="https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+          src="https://i.postimg.cc/Hnwq4kvv/DSCF2902.png"
           alt="Киберспортивный клуб с неоновым освещением"
           layout="fill"
           objectFit="cover"
