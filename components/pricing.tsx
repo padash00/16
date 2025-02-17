@@ -7,7 +7,7 @@ const pricingData = [
   { zone: "Standart", hourly: 600, twoHours: 1200, threeHours: 1800, night: 2200, day: 1500 },
   { zone: "Standart PRO", hourly: 800, twoHours: 1600, threeHours: 2400, night: 2800, day: 2000 },
   { zone: "Standart Premium", hourly: 1000, twoHours: 2000, threeHours: 3000, night: 3500, day: 2500 },
-  { zone: "Next Level", hourly: 1300, twoHours: 2600, threeHours: 3900, night: 4000, day: "-" },
+  { zone: "Next Level", hourly: 1300, twoHours: 2600, threeHours: 3900, night: 4500, day: "-" },
   { zone: "PRO Zone", hourly: 1600, twoHours: 3200, threeHours: 4800, night: 5500, day: "-" },
 ];
 
