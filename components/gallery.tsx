@@ -6,27 +6,27 @@ import { motion, AnimatePresence } from "framer-motion"
 
 const images = [
   {
-    src: "https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    src: "https://i.postimg.cc/1RD1ZvR0/DSCF2899.png",
     alt: "Киберспортивный клуб с неоновым освещением",
     category: "zones",
   },
   {
-    src: "https://images.unsplash.com/photo-1511882150382-421056c89033?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80",
+    src: "https://i.postimg.cc/MKx2Z1XC/DSCF2900.png",
     alt: "Турнир по киберспорту",
     category: "tournaments",
   },
   {
-    src: "https://images.unsplash.com/photo-1560253023-3ec5d502959f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    src: "https://i.postimg.cc/Hnwq4kvv/DSCF2902.png",
     alt: "Игроки за компьютерами",
     category: "players",
   },
   {
-    src: "https://images.unsplash.com/photo-1542751110-97427bbecf20?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2048&q=80",
+    src: "https://i.postimg.cc/kGPrbbst/DSCF2903.png",
     alt: "Игровые компьютеры с RGB подсветкой",
     category: "zones",
   },
   {
-    src: "https://images.unsplash.com/photo-1551431009-a802eeec77b1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80",
+    src: "https://i.postimg.cc/4N5CYn9m/DSCF2919.png",
     alt: "Киберспортивная арена",
     category: "tournaments",
   },
