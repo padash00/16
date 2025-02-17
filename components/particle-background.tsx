@@ -1,15 +1,15 @@
 "use client"
 
-import type React from "react"
-import { useCallback } from "react"
-import Particles from "react-tsparticles"
-import { loadSlim } from "tsparticles-slim"
-import type { Engine } from "tsparticles-engine"
+import type React from "react";
+import { useCallback } from "react";
+import Particles from "react-tsparticles";
+import { loadSlim } from "tsparticles-slim";
+import type { Engine } from "tsparticles-engine";
 
 const ParticleBackground: React.FC = () => {
   const particlesInit = useCallback(async (engine: Engine) => {
-    await loadSlim(engine)
-  }, [])
+    await loadSlim(engine);
+  }, []);
 
   return (
     <Particles
@@ -18,11 +18,9 @@ const ParticleBackground: React.FC = () => {
       options={{
         fullScreen: { enable: false },
         background: {
-          color: {
-            value: "transparent",
-          },
+          color: "transparent",
         },
-        fpsLimit: 60,
+        fpsLimit: 120,
         interactivity: {
           events: {
             onClick: {
@@ -31,7 +29,7 @@ const ParticleBackground: React.FC = () => {
             },
             onHover: {
               enable: true,
-              mode: "repulse",
+              mode: "bubble",
             },
             resize: true,
           },
@@ -39,9 +37,12 @@ const ParticleBackground: React.FC = () => {
             push: {
               quantity: 4,
             },
-            repulse: {
+            bubble: {
               distance: 200,
+              size: 10,
               duration: 0.4,
+              opacity: 0.8,
+              speed: 3,
             },
           },
         },
@@ -53,7 +54,7 @@ const ParticleBackground: React.FC = () => {
             color: "#cde901",
             distance: 150,
             enable: true,
-            opacity: 0.5,
+            opacity: 0.4,
             width: 1,
           },
           collisions: {
@@ -74,10 +75,10 @@ const ParticleBackground: React.FC = () => {
               enable: true,
               area: 800,
             },
-            value: 80,
+            value: 100,
           },
           opacity: {
-            value: 0.5,
+            value: 0.6,
           },
           shape: {
             type: "circle",
@@ -89,8 +90,7 @@ const ParticleBackground: React.FC = () => {
         detectRetina: true,
       }}
     />
-  )
-}
+  );
+};
 
-export default ParticleBackground
-
+export default ParticleBackground;
