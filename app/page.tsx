@@ -10,7 +10,6 @@ const SocialMedia = dynamic(() => import("../components/social-media"), { ssr: f
 
 // Новый клиентский компонент для использования useSmoothScroll
 const SmoothScrollWrapper = dynamic(() => import('../components/smooth-scroll-wrapper'), { ssr: false })
-<meta name="yandex-verification" content="b405395072309a48" />
 export default function Home() {
   return (
     <SmoothScrollWrapper>
