@@ -1,4 +1,5 @@
-import type { Metadata } from "next"
+\import type { Metadata } from "next"
+import Head from "next/head"
 import { Inter, Oswald, Rajdhani, Orbitron, Play } from 'next/font/google'
 import localFont from 'next/font/local'
 import Navigation from "../components/navigation"
@@ -34,6 +35,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       lang="ru"
       className={`${inter.variable} ${oswald.variable} ${rajdhani.variable} ${orbitron.variable} ${play.variable} ${accid.variable}`}
     >
+      <Head>
+        <meta name="yandex-verification" content="b405395072309a48" />
+      </Head>
       <body className="font-inter bg-dark-bg text-white">
         <Navigation />
         {children}
