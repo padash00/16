@@ -1,4 +1,4 @@
-\import type { Metadata } from "next"
+import type { Metadata } from "next"
 import Head from "next/head"
 import { Inter, Oswald, Rajdhani, Orbitron, Play } from 'next/font/google'
 import localFont from 'next/font/local'
