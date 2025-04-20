@@ -356,48 +356,54 @@ export default function Home() {
 
       {/* Шапка */}
       <header className="container mx-auto px-4 py-6 relative z-10">
-        <div className="flex flex-col md:flex-row justify-between items-center">
-          <div className="mb-6 md:mb-0 cyber-corner cyber-shadow">
-            <h1
-              className="text-3xl md:text-5xl font-orbitron font-bold tracking-wider cyber-glitch-text"
-              data-text="F16 ARENA"
-            >
-              F16 ARENA
-            </h1>
-            <p className="text-sm md:text-base text-muted-color tracking-wide cyber-text">КИБЕРСПОРТИВНЫЙ КЛУБ</p>
-            <div className="cyber-status mt-2"></div>
-          </div>
-          <nav className="bg-darker-bg/80 backdrop-blur-sm p-2 border border-border-color cyber-frame">
-            <ul className="flex flex-wrap justify-center gap-2 md:gap-0">
-              <li>
-                <Link href="#" className="cyber-nav-item active">
-                  ГЛАВНАЯ
-                </Link>
-              </li>
-              <li>
-                <Link href="#pricing" className="cyber-nav-item">
-                  ТАРИФЫ
-                </Link>
-              </li>
-              <li>
-                <Link href="#specs" className="cyber-nav-item">
-                  ОБОРУДОВАНИЕ
-                </Link>
-              </li>
-              <li>
-                <Link href="#gallery" className="cyber-nav-item">
-                  ГАЛЕРЕЯ
-                </Link>
-              </li>
-              <li>
-                <Link href="#contact" className="cyber-nav-item">
-                  КОНТАКТЫ
-                </Link>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </header>
+  <div className="flex flex-col gap-6 md:flex-row md:justify-between md:items-center">
+    {/* Логотип и подзаголовок */}
+    <div className="cyber-corner cyber-shadow text-center md:text-left">
+      <h1
+        className="text-3xl md:text-5xl font-orbitron font-bold tracking-wider cyber-glitch-text"
+        data-text="F16 ARENA"
+      >
+        F16 ARENA
+      </h1>
+      <p className="text-sm md:text-base text-muted-color tracking-wide cyber-text">
+        КИБЕРСПОРТИВНЫЙ КЛУБ
+      </p>
+      <div className="cyber-status mt-2"></div>
+    </div>
+
+    {/* Навигация */}
+    <nav className="bg-darker-bg/80 backdrop-blur-sm p-3 border border-border-color cyber-frame rounded-md">
+      <ul className="flex flex-col md:flex-row justify-center items-center gap-2 md:gap-4">
+        <li>
+          <Link href="#" className="cyber-nav-item active">
+            ГЛАВНАЯ
+          </Link>
+        </li>
+        <li>
+          <Link href="#pricing" className="cyber-nav-item">
+            ТАРИФЫ
+          </Link>
+        </li>
+        <li>
+          <Link href="#specs" className="cyber-nav-item">
+            ОБОРУДОВАНИЕ
+          </Link>
+        </li>
+        <li>
+          <Link href="#gallery" className="cyber-nav-item">
+            ГАЛЕРЕЯ
+          </Link>
+        </li>
+        <li>
+          <Link href="#contact" className="cyber-nav-item">
+            КОНТАКТЫ
+          </Link>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
 
       {/* Главный экран */}
       <section className="relative py-20 md:py-32 overflow-hidden border-t border-b border-border-color scanline hologram grid-overlay w-screen max-w-none">
