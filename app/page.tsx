@@ -884,10 +884,10 @@ export default function Home() {
                     <div>
                       <span className="text-muted-color text-xs block">Email:</span>
                       <a
-                        href="mailto:info@f16arena.kz"
+                        href="mailto:f16arena@gmail.com"
                         className="text-sm md:text-base hover:text-neon-blue transition-colors break-all"
                       >
-                        info@f16arena.kz
+                        f16arena@gmail.com
                       </a>
                     </div>
                   </li>
