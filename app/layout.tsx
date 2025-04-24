@@ -5,6 +5,7 @@ import "./globals.css"
 import Image from "next/image"
 import Link from "next/link"
 import { ChevronRight, Facebook, Instagram, Twitch } from "lucide-react"
+<link rel="icon" href="/favicon.ico" />
 
 // Загрузка шрифта Orbitron
 const orbitron = Orbitron({
@@ -35,10 +36,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ru" className={`${orbitron.variable} ${roboto.variable}`}>
-      <body className="bg-gradient-to-b from-[#0D0D0D] to-[#1A1A1A] text-white min-h-screen">{children}</body>
+      <head>
+        <link rel="icon" href="/favicon.ico" />
+        <meta charSet="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      </head>
+      <body className="bg-gradient-to-b from-[#0D0D0D] to-[#1A1A1A] text-white min-h-screen">
+        {children}
+      </body>
     </html>
   )
 }
+
 
 function Home() {
   // Data for pricing tiers
