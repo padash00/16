@@ -637,6 +637,7 @@ export default function Home() {
           </p>
         </div>
       </section>
+
       {/* Оборудование */}
 <section id="specs" className="py-20 bg-black/30 backdrop-blur-sm cyber-grid">
   <div className="container mx-auto px-4">
@@ -651,7 +652,7 @@ export default function Home() {
       {specsTiers.map((spec, index) => {
         const device = devicesTiers.find(d => d.tier === spec.tier);
 
-        // Определение цвета рамки по tier
+        // Определяем цвет рамки по tier
         let borderColor = "neon-border-cyan"; // по умолчанию
         if (spec.tier.includes("Standart") && !spec.tier.includes("Premium")) borderColor = "neon-border-red";
         if (spec.tier.includes("Standart PRO")) borderColor = "neon-border-cyan";
@@ -662,27 +663,28 @@ export default function Home() {
         return (
           <div
             key={index}
-            className={`relative rounded-lg overflow-hidden transition-transform hover:-translate-y-1 duration-300 fade-in ${borderColor}`}
+            className={`relative bg-black/50 backdrop-blur-sm rounded-lg p-6 ${borderColor} transition-transform hover:-translate-y-1 duration-300 fade-in flex flex-col justify-between`}
             style={{ animationDelay: `${index * 0.1}s` }}
           >
-            <div className="relative bg-black/50 backdrop-blur-sm p-6 rounded-lg h-full flex flex-col">
-              <h3 className="text-xl font-bold mb-4 font-orbitron text-center">{spec.tier}</h3>
+            {/* Название зоны */}
+            <h3 className="text-xl font-bold mb-6 font-orbitron text-center">
+              {spec.tier}
+            </h3>
 
-              {/* Характеристики */}
-              <ul className="space-y-2 text-muted-color text-sm mb-4">
-                <li><span className="font-bold text-white">CPU:</span> {spec.cpu}</li>
-                <li><span className="font-bold text-white">GPU:</span> {spec.gpu}</li>
-                <li><span className="font-bold text-white">RAM:</span> {spec.ram}</li>
-                <li><span className="font-bold text-white">Монитор:</span> {spec.monitor}</li>
-              </ul>
+            {/* Особенности */}
+            <div className="flex flex-col space-y-2 text-gray-300 text-sm">
+              <p><span className="text-white font-bold">CPU:</span> {spec.cpu}</p>
+              <p><span className="text-white font-bold">GPU:</span> {spec.gpu}</p>
+              <p><span className="text-white font-bold">RAM:</span> {spec.ram}</p>
+              <p><span className="text-white font-bold">Монитор:</span> {spec.monitor}</p>
 
               {/* Устройства */}
               {device && (
-                <ul className="space-y-2 text-muted-color text-sm">
-                  <li><span className="font-bold text-white">{device.devices[0].type}:</span> {device.devices[0].name}</li>
-                  <li><span className="font-bold text-white">{device.devices[1].type}:</span> {device.devices[1].name}</li>
-                  <li><span className="font-bold text-white">{device.devices[2].type}:</span> {device.devices[2].name}</li>
-                </ul>
+                <>
+                  <p><span className="text-white font-bold">{device.devices[0].type}:</span> {device.devices[0].name}</p>
+                  <p><span className="text-white font-bold">{device.devices[1].type}:</span> {device.devices[1].name}</p>
+                  <p><span className="text-white font-bold">{device.devices[2].type}:</span> {device.devices[2].name}</p>
+                </>
               )}
             </div>
           </div>
@@ -692,6 +694,7 @@ export default function Home() {
   </div>
 </section>
 
+      
       {/* Секция галереи */}
       <section id="gallery" className="py-20 cyber-mesh">
         <div className="container mx-auto px-4">
