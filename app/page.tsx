@@ -638,106 +638,57 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Секция характеристик */}
-      <section id="specs" className="py-20 digital-distortion">
-        <div className="container mx-auto px-4">
-          <div className="mb-12">
-            <h2 className="cyber-heading cyber-heading-blue text-3xl md:text-4xl font-orbitron font-bold mb-4 cyber-title">
-              ТЕХНИЧЕСКИЕ ХАРАКТЕРИСТИКИ
-            </h2>
-            <p className="text-muted-color max-w-2xl ml-4">
-              Мощные компьютеры для максимальной производительности в любых играх
-            </p>
+      {/* Оборудование */}
+<section id="specs" className="py-20 bg-black/30 backdrop-blur-sm">
+  <div className="container mx-auto px-4">
+    <h2
+      className="text-3xl md:text-4xl font-bold text-center mb-12 font-orbitron glitch"
+      data-text="Оборудование и устройства"
+    >
+      Оборудование и устройства
+    </h2>
+
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+      {specsTiers.map((spec, index) => {
+        const device = devicesTiers.find(d => d.tier === spec.tier);
+
+        return (
+          <div
+            key={index}
+            className="relative rounded-lg overflow-hidden transition-transform hover:-translate-y-1 duration-300 fade-in"
+            style={{ animationDelay: `${index * 0.1}s` }}
+          >
+            {/* Неоновая рамка */}
+            <div className="absolute inset-0 p-0.5 rounded-lg neon-border-cyan opacity-70"></div>
+
+            {/* Содержание карточки */}
+            <div className="relative bg-black/50 backdrop-blur-sm p-6 rounded-lg h-full flex flex-col">
+              <h3 className="text-xl font-bold mb-4 font-orbitron neon-cyan text-center">{spec.tier}</h3>
+
+              {/* Характеристики */}
+              <ul className="space-y-2 text-muted-color text-sm mb-4">
+                <li><span className="font-bold text-white">CPU:</span> {spec.cpu}</li>
+                <li><span className="font-bold text-white">GPU:</span> {spec.gpu}</li>
+                <li><span className="font-bold text-white">RAM:</span> {spec.ram}</li>
+                <li><span className="font-bold text-white">Монитор:</span> {spec.monitor}</li>
+              </ul>
+
+              {/* Устройства */}
+              {device && (
+                <ul className="space-y-2 text-muted-color text-sm">
+                  <li><span className="font-bold text-white">Мышь:</span> {device.mouse}</li>
+                  <li><span className="font-bold text-white">Клавиатура:</span> {device.keyboard}</li>
+                  <li><span className="font-bold text-white">Наушники:</span> {device.headset}</li>
+                </ul>
+              )}
+            </div>
           </div>
+        );
+      })}
+    </div>
+  </div>
+</section>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
-            {specsTiers.map((spec, index) => (
-              <div
-                key={index}
-                className={`bg-darker-bg/80 backdrop-blur-sm border border-neon-${spec.color} rounded-lg overflow-hidden fade-in data-stream h-full`}
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                <div className="p-6 flex flex-col h-full">
-                  <div className="flex items-center mb-4">
-                    <div className={`mr-2 text-neon-${spec.color}`}>{spec.icon}</div>
-                    <h3 className={`text-xl font-orbitron font-bold neon-${spec.color}`}>{spec.tier}</h3>
-                  </div>
-
-                  <ul className="space-y-4 flex-grow">
-                    <li className="flex items-start">
-                      <div className="flex-shrink-0 w-24 text-muted-color font-mono">CPU:</div>
-                      <div className="flex-grow">{spec.cpu}</div>
-                    </li>
-                    <li className="flex items-start">
-                      <div className="flex-shrink-0 w-24 text-muted-color font-mono">GPU:</div>
-                      <div className="flex-grow">{spec.gpu}</div>
-                    </li>
-                    <li className="flex items-start">
-                      <div className="flex-shrink-0 w-24 text-muted-color font-mono">RAM:</div>
-                      <div className="flex-grow">{spec.ram}</div>
-                    </li>
-                    <li className="flex items-start">
-                      <div className="flex-shrink-0 w-24 text-muted-color font-mono">MONITOR:</div>
-                      <div className="flex-grow">{spec.monitor}</div>
-                    </li>
-                  </ul>
-
-                  <div className="mt-4 pt-4 border-t border-border-color">
-                    <div className={`text-center font-orbitron font-bold neon-${spec.color}`}>TIER {index + 1}</div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Секция устройств */}
-      <section className="py-20 bg-darker-bg cyber-grid">
-        <div className="container mx-auto px-4">
-          <div className="mb-12">
-            <h2 className="cyber-heading cyber-heading-yellow text-3xl md:text-4xl font-orbitron font-bold mb-4 cyber-title">
-              ИГРОВЫЕ УСТРОЙСТВА
-            </h2>
-            <p className="text-muted-color max-w-2xl ml-4">
-              Профессиональные периферийные устройства для максимального комфорта
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
-            {devicesTiers.map((tier, index) => (
-              <div
-                key={index}
-                className={`bg-darker-bg/80 backdrop-blur-sm border border-neon-${tier.color} rounded-lg overflow-hidden fade-in h-full`}
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                <div className="p-6 flex flex-col h-full">
-                  <div className="flex items-center mb-4">
-                    <Monitor className={`h-5 w-5 mr-2 text-neon-${tier.color}`} />
-                    <h3 className={`text-xl font-orbitron font-bold neon-${tier.color}`}>{tier.tier}</h3>
-                  </div>
-
-                  <ul className="space-y-4 flex-grow">
-                    {tier.devices.map((device, deviceIndex) => (
-                      <li key={deviceIndex} className="flex items-center">
-                        <div className={`mr-3 text-neon-${tier.color}`}>{device.icon}</div>
-                        <div>
-                          <span className="text-muted-color text-xs block font-mono">{device.type}:</span>
-                          <span className="text-sm">{device.name}</span>
-                        </div>
-                      </li>
-                    ))}
-                  </ul>
-
-                  <div className="mt-4 pt-4 border-t border-border-color">
-                    <div className={`text-center font-orbitron font-bold neon-${tier.color}`}>TIER {index + 1}</div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Секция галереи */}
       <section id="gallery" className="py-20 cyber-mesh">
