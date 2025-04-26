@@ -1937,5 +1937,16 @@ body::before {
 .bg-neon-glow {
   background: linear-gradient(90deg, #ff007f, #00f0ff, #c401ff);
   box-shadow: 0 0 10px #ff007f, 0 0 20px #00f0ff, 0 0 30px #c401ff;
+  @keyframes pulse-bar {
+  0%, 100% {
+    opacity: 0.7;
+    transform: scaleY(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scaleY(1.3);
+  }
+}
+
   border-radius: 9999px;
 }
