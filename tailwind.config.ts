@@ -398,3 +398,20 @@ const config: Config = {
   plugins: [require("tailwindcss-animate")],
 }
 export default config
+module.exports = {
+  theme: {
+    extend: {
+      animation: {
+        'pulse-bar': 'pulse-bar 2s ease-in-out infinite',
+      },
+      keyframes: {
+        'pulse-bar': {
+          '0%, 100%': { opacity: '0.7', transform: 'scaleY(1)' },
+          '50%': { opacity: '1', transform: 'scaleY(1.3)' },
+        },
+      },
+    },
+  },
+  plugins: [],
+}
+
