@@ -843,6 +843,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+      
       {/* Прокачка уровня */}
 <section id="progress" className="py-20 bg-black/30 backdrop-blur-sm">
   <div className="container mx-auto px-4">
@@ -853,16 +854,16 @@ export default function Home() {
       Level Up Discounts
     </h2>
 
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-      {/* Silver */}
-      <div
-        className="bg-black/50 backdrop-blur-sm rounded-lg p-6 neon-border-cyan transition-transform hover:-translate-y-1 duration-300 fade-in"
-        style={{ animationDelay: "0.1s" }}
-      >
-        <h3 className="text-xl font-bold mb-4 font-orbitron neon-cyan">Silver</h3>
-        <p className="text-gray-300 mb-2">Потрать более 60 000 ₸</p>
-        <p className="text-2xl font-bold neon-cyan">-10%</p>
-      </div>
+    {/* Silver */}
+<div
+  className="bg-black/50 backdrop-blur-sm rounded-lg p-6 neon-border-blue transition-transform hover:-translate-y-1 duration-300 fade-in"
+  style={{ animationDelay: "0.1s" }}
+>
+  <h3 className="text-xl font-bold mb-4 font-orbitron neon-blue">Silver</h3>
+  <p className="text-gray-300 mb-2">Потрать более 60 000 ₸</p>
+  <p className="text-2xl font-bold neon-blue">-10%</p>
+</div>
+
 
       {/* Gold */}
       <div
