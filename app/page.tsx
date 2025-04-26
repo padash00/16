@@ -405,7 +405,7 @@ export default function Home() {
 </header>
 
 
-     export default function HeroSection() {
+     function HeroSection() {
   return (
     <section className="relative py-20 md:py-32 overflow-hidden w-screen max-w-none border-t border-b border-border-color">
       {/* Слайд фон */}
