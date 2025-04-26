@@ -843,6 +843,60 @@ export default function Home() {
           </div>
         </div>
       </section>
+      {/* Прокачка уровня */}
+<section id="progress" className="py-20 bg-black/30 backdrop-blur-sm">
+  <div className="container mx-auto px-4">
+    <h2
+      className="text-3xl md:text-4xl font-bold text-center mb-12 font-orbitron glitch"
+      data-text="Level Up Discounts"
+    >
+      Level Up Discounts
+    </h2>
+
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {/* Silver */}
+      <div
+        className="bg-black/50 backdrop-blur-sm rounded-lg p-6 neon-border-cyan transition-transform hover:-translate-y-1 duration-300 fade-in"
+        style={{ animationDelay: "0.1s" }}
+      >
+        <h3 className="text-xl font-bold mb-4 font-orbitron neon-cyan">Silver</h3>
+        <p className="text-gray-300 mb-2">Потрать более 60 000 ₸</p>
+        <p className="text-2xl font-bold neon-cyan">-10%</p>
+      </div>
+
+      {/* Gold */}
+      <div
+        className="bg-black/50 backdrop-blur-sm rounded-lg p-6 neon-border-yellow transition-transform hover:-translate-y-1 duration-300 fade-in"
+        style={{ animationDelay: "0.3s" }}
+      >
+        <h3 className="text-xl font-bold mb-4 font-orbitron neon-yellow">Gold</h3>
+        <p className="text-gray-300 mb-2">Потрать более 80 000 ₸</p>
+        <p className="text-2xl font-bold neon-yellow">-20%</p>
+      </div>
+
+      {/* Platinum */}
+      <div
+        className="bg-black/50 backdrop-blur-sm rounded-lg p-6 neon-border-purple transition-transform hover:-translate-y-1 duration-300 fade-in"
+        style={{ animationDelay: "0.5s" }}
+      >
+        <h3 className="text-xl font-bold mb-4 font-orbitron neon-purple">Platinum</h3>
+        <p className="text-gray-300 mb-2">Потрать более 250 000 ₸</p>
+        <p className="text-2xl font-bold neon-purple">-30%</p>
+      </div>
+
+      {/* Almaz */}
+      <div
+        className="bg-black/50 backdrop-blur-sm rounded-lg p-6 neon-border-red transition-transform hover:-translate-y-1 duration-300 fade-in"
+        style={{ animationDelay: "0.7s" }}
+      >
+        <h3 className="text-xl font-bold mb-4 font-orbitron neon-red">Almaz</h3>
+        <p className="text-gray-300 mb-2">Потрать более 500 000 ₸</p>
+        <p className="text-2xl font-bold neon-red">-40%</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 
       {/* Секция контактов */}
       <section id="contact" className="py-12 md:py-20 bg-darker-bg cyber-grid">
