@@ -637,91 +637,94 @@ export default function Home() {
           </p>
         </div>
       </section>
-      {/* Оборудование */}
-<section id="specs" className="py-20 bg-black/30 backdrop-blur-sm cyber-grid">
+
+      {/* Оборудование и устройства */}
+<section id="equipment" className="py-20 cyber-mesh">
   <div className="container mx-auto px-4">
-    <h2
-      className="text-3xl md:text-4xl font-bold text-center mb-12 font-orbitron glitch"
-      data-text="Оборудование и устройства"
-    >
-      Оборудование и устройства
-    </h2>
+    <div className="mb-12">
+      <h2 className="cyber-heading text-3xl md:text-4xl font-orbitron font-bold mb-4 cyber-title">
+        ОБОРУДОВАНИЕ И УСТРОЙСТВА
+      </h2>
+      <p className="text-muted-color max-w-2xl ml-4">
+        Ознакомься с конфигурациями техники и периферии каждой зоны
+      </p>
+    </div>
 
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
       {specsTiers.map((spec, index) => {
         const device = devicesTiers.find(d => d.tier === spec.tier);
 
-        // Цвет рамки по уровню
-        let borderColor = "neon-border-cyan";
-        let titleColor = "neon-cyan";
-        if (spec.tier.includes("Standart") && !spec.tier.includes("Premium")) {
-          borderColor = "neon-border-red";
-          titleColor = "neon-red";
-        }
-        if (spec.tier.includes("Standart PRO")) {
-          borderColor = "neon-border-cyan";
-          titleColor = "neon-cyan";
-        }
-        if (spec.tier.includes("Standart Premium")) {
-          borderColor = "neon-border-purple";
-          titleColor = "neon-purple";
-        }
-        if (spec.tier.includes("VIP")) {
-          borderColor = "neon-border-yellow";
-          titleColor = "neon-yellow";
-        }
-        if (spec.tier.includes("PRO")) {
-          borderColor = "neon-border-green";
-          titleColor = "neon-green";
-        }
+        let color = "cyan"; // по умолчанию
+        if (spec.tier.includes("Standart") && !spec.tier.includes("Premium")) color = "red";
+        if (spec.tier.includes("Standart PRO")) color = "cyan";
+        if (spec.tier.includes("Standart Premium")) color = "purple";
+        if (spec.tier.includes("VIP")) color = "yellow";
+        if (spec.tier.includes("PRO")) color = "green";
 
         return (
           <div
             key={index}
-            className={`relative bg-black/50 backdrop-blur-sm rounded-lg p-6 ${borderColor} transition-transform hover:-translate-y-1 duration-300 fade-in flex flex-col justify-between`}
+            className={`bg-darker-bg/80 backdrop-blur-sm border border-neon-${color} rounded-lg overflow-hidden fade-in digital-distortion`}
             style={{ animationDelay: `${index * 0.1}s` }}
           >
-            {/* Название зоны */}
-            <h3 className={`text-lg font-bold mb-6 font-orbitron text-center ${titleColor}`}>
-              {spec.tier}
-            </h3>
-
-            {/* Особенности */}
-            <div className="flex flex-col space-y-3 text-gray-300 text-sm">
-              <div className="flex items-center space-x-2">
-                <span className="font-bold text-white">CPU:</span>
-                <span>{spec.cpu}</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <span className="font-bold text-white">GPU:</span>
-                <span>{spec.gpu}</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <span className="font-bold text-white">RAM:</span>
-                <span>{spec.ram}</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <span className="font-bold text-white">Монитор:</span>
-                <span>{spec.monitor}</span>
+            <div className="p-6 h-full flex flex-col">
+              {/* Заголовок */}
+              <div className="flex justify-between items-start mb-4">
+                <div className="flex items-center">
+                  <h3 className={`text-xl font-orbitron font-bold neon-${color}`}>{spec.tier}</h3>
+                </div>
+                <span className="text-xs bg-darker-bg px-2 py-1 border border-border-color cyber-frame">
+                  {index + 1}
+                </span>
               </div>
 
-              {/* Устройства */}
-              {device && (
-                <>
-                  <div className="flex items-center space-x-2">
-                    <span className="font-bold text-white">{device.devices[0].type}:</span>
-                    <span>{device.devices[0].name}</span>
+              {/* Характеристики */}
+              <div className="space-y-4 mb-6 flex-grow">
+                <div className={`cyber-divider-${color}`}></div>
+
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="text-muted-color">CPU:</span>
+                    <span>{spec.cpu}</span>
                   </div>
-                  <div className="flex items-center space-x-2">
-                    <span className="font-bold text-white">{device.devices[1].type}:</span>
-                    <span>{device.devices[1].name}</span>
+                  <div className="flex items-center justify-between">
+                    <span className="text-muted-color">GPU:</span>
+                    <span>{spec.gpu}</span>
                   </div>
-                  <div className="flex items-center space-x-2">
-                    <span className="font-bold text-white">{device.devices[2].type}:</span>
-                    <span>{device.devices[2].name}</span>
+                  <div className="flex items-center justify-between">
+                    <span className="text-muted-color">RAM:</span>
+                    <span>{spec.ram}</span>
                   </div>
-                </>
-              )}
+                  <div className="flex items-center justify-between">
+                    <span className="text-muted-color">Монитор:</span>
+                    <span>{spec.monitor}</span>
+                  </div>
+
+                  {device && (
+                    <>
+                      <div className="flex items-center justify-between">
+                        <span className="text-muted-color">{device.devices[0].type}:</span>
+                        <span>{device.devices[0].name}</span>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-muted-color">{device.devices[1].type}:</span>
+                        <span>{device.devices[1].name}</span>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-muted-color">{device.devices[2].type}:</span>
+                        <span>{device.devices[2].name}</span>
+                      </div>
+                    </>
+                  )}
+                </div>
+              </div>
+
+              {/* Кнопка выбрать */}
+              <a href="https://api.whatsapp.com/send/?phone=77080161720&text=Здравствуйте! Пишу по поводу выбора зоны&type=phone_number&app_absent=0">
+                <button className={`cyber-button cyber-button-${color} w-full`}>
+                  ВЫБРАТЬ
+                </button>
+              </a>
             </div>
           </div>
         );
@@ -730,7 +733,6 @@ export default function Home() {
   </div>
 </section>
 
-      
       {/* Секция галереи */}
       <section id="gallery" className="py-20 cyber-mesh">
         <div className="container mx-auto px-4">
