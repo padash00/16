@@ -747,9 +747,10 @@ export default function Home() {
     </div>
   </div>
 </section>
-      <div className="relative my-16">
-  <div className="h-0.5 w-full bg-gradient-to-r from-neon-pink via-neon-blue to-neon-purple animate-pulse"></div>
+      <div className="relative flex justify-center my-20">
+  <div className="w-48 h-1 bg-neon-glow"></div>
 </div>
+
 
       {/* Секция галереи */}
       <section id="gallery" className="py-20 cyber-mesh">
