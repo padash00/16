@@ -1,5 +1,5 @@
 "use client"
-
+import { Mouse, Keyboard, Headphones } from "lucide-react";
 import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
@@ -637,8 +637,7 @@ export default function Home() {
           </p>
         </div>
       </section>
-
-      {/* Оборудование и устройства */}
+{/* Оборудование и устройства */}
 <section id="equipment" className="py-20 cyber-mesh">
   <div className="container mx-auto px-4">
     <div className="mb-12">
@@ -654,7 +653,7 @@ export default function Home() {
       {specsTiers.map((spec, index) => {
         const device = devicesTiers.find(d => d.tier === spec.tier);
 
-        let color = "cyan"; // по умолчанию
+        let color = "cyan"; // Цвет по дефолту
         if (spec.tier.includes("Standart") && !spec.tier.includes("Premium")) color = "red";
         if (spec.tier.includes("Standart PRO")) color = "cyan";
         if (spec.tier.includes("Standart Premium")) color = "purple";
@@ -678,41 +677,54 @@ export default function Home() {
                 </span>
               </div>
 
-              {/* Характеристики */}
+              {/* Особенности */}
               <div className="space-y-4 mb-6 flex-grow">
                 <div className={`cyber-divider-${color}`}></div>
 
                 <div className="space-y-2">
-                  <div className="flex items-center justify-between">
+                  {/* Процессор */}
+                  <div className="flex items-center space-x-2">
                     <span className="text-muted-color">CPU:</span>
-                    <span>{spec.cpu}</span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-muted-color">GPU:</span>
-                    <span>{spec.gpu}</span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-muted-color">RAM:</span>
-                    <span>{spec.ram}</span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-muted-color">Монитор:</span>
-                    <span>{spec.monitor}</span>
+                    <span className="text-white">{spec.cpu}</span>
                   </div>
 
+                  {/* Видеокарта */}
+                  <div className="flex items-center space-x-2">
+                    <span className="text-muted-color">GPU:</span>
+                    <span className="text-white">{spec.gpu}</span>
+                  </div>
+
+                  {/* Память */}
+                  <div className="flex items-center space-x-2">
+                    <span className="text-muted-color">RAM:</span>
+                    <span className="text-white">{spec.ram}</span>
+                  </div>
+
+                  {/* Монитор */}
+                  <div className="flex items-center space-x-2">
+                    <span className="text-muted-color">Монитор:</span>
+                    <span className="text-white">{spec.monitor}</span>
+                  </div>
+
+                  {/* Периферия с иконками */}
                   {device && (
                     <>
-                      <div className="flex items-center justify-between">
-                        <span className="text-muted-color">{device.devices[0].type}:</span>
-                        <span>{device.devices[0].name}</span>
+                      {/* Мышь */}
+                      <div className="flex items-center space-x-2">
+                        <Mouse className="h-4 w-4 text-muted-color opacity-80" />
+                        <span className="text-white">{device.devices[0].name}</span>
                       </div>
-                      <div className="flex items-center justify-between">
-                        <span className="text-muted-color">{device.devices[1].type}:</span>
-                        <span>{device.devices[1].name}</span>
+
+                      {/* Клавиатура */}
+                      <div className="flex items-center space-x-2">
+                        <Keyboard className="h-4 w-4 text-muted-color opacity-80" />
+                        <span className="text-white">{device.devices[1].name}</span>
                       </div>
-                      <div className="flex items-center justify-between">
-                        <span className="text-muted-color">{device.devices[2].type}:</span>
-                        <span>{device.devices[2].name}</span>
+
+                      {/* Наушники */}
+                      <div className="flex items-center space-x-2">
+                        <Headphones className="h-4 w-4 text-muted-color opacity-80" />
+                        <span className="text-white">{device.devices[2].name}</span>
                       </div>
                     </>
                   )}
@@ -721,10 +733,14 @@ export default function Home() {
 
               {/* Кнопка выбрать */}
               <a href="https://api.whatsapp.com/send/?phone=77080161720&text=Здравствуйте! Пишу по поводу выбора зоны&type=phone_number&app_absent=0">
-                <button className={`cyber-button cyber-button-${color} w-full`}>
+                <button
+                  className={`cyber-button cyber-button-${color} w-full`}
+                  style={{ "--neon-color": `var(--neon-${color})` } as React.CSSProperties}
+                >
                   ВЫБРАТЬ
                 </button>
               </a>
+
             </div>
           </div>
         );
@@ -732,7 +748,7 @@ export default function Home() {
     </div>
   </div>
 </section>
-
+      
       {/* Секция галереи */}
       <section id="gallery" className="py-20 cyber-mesh">
         <div className="container mx-auto px-4">
