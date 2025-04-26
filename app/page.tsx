@@ -859,6 +859,14 @@ export default function Home() {
         className="bg-black/50 backdrop-blur-sm rounded-lg p-6 neon-border-blue transition-transform hover:-translate-y-1 duration-300 fade-in"
         style={{ animationDelay: "0.1s" }}
       >
+        <div className="flex justify-center mb-4">
+  <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-neon-blue">
+    <path d="M12 2L2 7V12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12V7L12 2Z" stroke="currentColor" strokeWidth="2" />
+    <path d="M9 12H15" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+    <path d="M12 9V15" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+  </svg>
+</div>
+
         <h3 className="text-xl font-bold mb-4 font-orbitron neon-blue">Silver</h3>
         <p className="text-gray-300 mb-2">Потрать более 60 000 ₸</p>
         <p className="text-2xl font-bold neon-blue">-10%</p>
