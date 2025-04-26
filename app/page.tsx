@@ -854,19 +854,19 @@ export default function Home() {
     </h2>
 
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      
       {/* Silver */}
       <div
         className="bg-black/50 backdrop-blur-sm rounded-lg p-6 neon-border-blue transition-transform hover:-translate-y-1 duration-300 fade-in"
         style={{ animationDelay: "0.1s" }}
       >
         <div className="flex justify-center mb-4">
-  <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-neon-blue">
-    <path d="M12 2L2 7V12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12V7L12 2Z" stroke="currentColor" strokeWidth="2" />
-    <path d="M9 12H15" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-    <path d="M12 9V15" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-  </svg>
-</div>
-
+          <svg width="60" height="60" viewBox="0 0 24 24" fill="none" className="text-neon-blue">
+            <path d="M12 2L2 7V12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12V7L12 2Z" stroke="currentColor" strokeWidth="2" />
+            <path d="M9 12H15" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+            <path d="M12 9V15" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+          </svg>
+        </div>
         <h3 className="text-xl font-bold mb-4 font-orbitron neon-blue">Silver</h3>
         <p className="text-gray-300 mb-2">Потрать более 60 000 ₸</p>
         <p className="text-2xl font-bold neon-blue">-10%</p>
@@ -877,6 +877,12 @@ export default function Home() {
         className="bg-black/50 backdrop-blur-sm rounded-lg p-6 neon-border-yellow transition-transform hover:-translate-y-1 duration-300 fade-in"
         style={{ animationDelay: "0.3s" }}
       >
+        <div className="flex justify-center mb-4">
+          <svg width="60" height="60" viewBox="0 0 24 24" fill="none" className="text-neon-yellow">
+            <circle cx="12" cy="8" r="6" stroke="currentColor" strokeWidth="2" />
+            <path d="M8 16L12 22L16 16" stroke="currentColor" strokeWidth="2" />
+          </svg>
+        </div>
         <h3 className="text-xl font-bold mb-4 font-orbitron neon-yellow">Gold</h3>
         <p className="text-gray-300 mb-2">Потрать более 80 000 ₸</p>
         <p className="text-2xl font-bold neon-yellow">-20%</p>
@@ -887,6 +893,12 @@ export default function Home() {
         className="bg-black/50 backdrop-blur-sm rounded-lg p-6 neon-border-purple transition-transform hover:-translate-y-1 duration-300 fade-in"
         style={{ animationDelay: "0.5s" }}
       >
+        <div className="flex justify-center mb-4">
+          <svg width="60" height="60" viewBox="0 0 24 24" fill="none" className="text-neon-purple">
+            <path d="M3 12L12 2L21 12L12 22L3 12Z" stroke="currentColor" strokeWidth="2" />
+            <path d="M12 2V22" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+          </svg>
+        </div>
         <h3 className="text-xl font-bold mb-4 font-orbitron neon-purple">Platinum</h3>
         <p className="text-gray-300 mb-2">Потрать более 250 000 ₸</p>
         <p className="text-2xl font-bold neon-purple">-30%</p>
@@ -897,13 +909,22 @@ export default function Home() {
         className="bg-black/50 backdrop-blur-sm rounded-lg p-6 neon-border-red transition-transform hover:-translate-y-1 duration-300 fade-in"
         style={{ animationDelay: "0.7s" }}
       >
+        <div className="flex justify-center mb-4">
+          <svg width="60" height="60" viewBox="0 0 24 24" fill="none" className="text-neon-red">
+            <path d="M12 2L2 9L12 22L22 9L12 2Z" stroke="currentColor" strokeWidth="2" />
+            <path d="M2 9H22" stroke="currentColor" strokeWidth="2" />
+            <path d="M9 9L12 22L15 9" stroke="currentColor" strokeWidth="2" />
+          </svg>
+        </div>
         <h3 className="text-xl font-bold mb-4 font-orbitron neon-red">Almaz</h3>
         <p className="text-gray-300 mb-2">Потрать более 500 000 ₸</p>
         <p className="text-2xl font-bold neon-red">-40%</p>
       </div>
+
     </div>
   </div>
 </section>
+
 
       {/* Секция контактов */}
       <section id="contact" className="py-12 md:py-20 bg-darker-bg cyber-grid">
