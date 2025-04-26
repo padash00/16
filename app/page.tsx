@@ -637,7 +637,6 @@ export default function Home() {
           </p>
         </div>
       </section>
-
       {/* Оборудование */}
 <section id="specs" className="py-20 bg-black/30 backdrop-blur-sm cyber-grid">
   <div className="container mx-auto px-4">
@@ -652,13 +651,29 @@ export default function Home() {
       {specsTiers.map((spec, index) => {
         const device = devicesTiers.find(d => d.tier === spec.tier);
 
-        // Определяем цвет рамки по tier
-        let borderColor = "neon-border-cyan"; // по умолчанию
-        if (spec.tier.includes("Standart") && !spec.tier.includes("Premium")) borderColor = "neon-border-red";
-        if (spec.tier.includes("Standart PRO")) borderColor = "neon-border-cyan";
-        if (spec.tier.includes("Standart Premium")) borderColor = "neon-border-purple";
-        if (spec.tier.includes("VIP")) borderColor = "neon-border-yellow";
-        if (spec.tier.includes("PRO")) borderColor = "neon-border-green";
+        // Цвет рамки по уровню
+        let borderColor = "neon-border-cyan";
+        let titleColor = "neon-cyan";
+        if (spec.tier.includes("Standart") && !spec.tier.includes("Premium")) {
+          borderColor = "neon-border-red";
+          titleColor = "neon-red";
+        }
+        if (spec.tier.includes("Standart PRO")) {
+          borderColor = "neon-border-cyan";
+          titleColor = "neon-cyan";
+        }
+        if (spec.tier.includes("Standart Premium")) {
+          borderColor = "neon-border-purple";
+          titleColor = "neon-purple";
+        }
+        if (spec.tier.includes("VIP")) {
+          borderColor = "neon-border-yellow";
+          titleColor = "neon-yellow";
+        }
+        if (spec.tier.includes("PRO")) {
+          borderColor = "neon-border-green";
+          titleColor = "neon-green";
+        }
 
         return (
           <div
@@ -667,23 +682,44 @@ export default function Home() {
             style={{ animationDelay: `${index * 0.1}s` }}
           >
             {/* Название зоны */}
-            <h3 className="text-xl font-bold mb-6 font-orbitron text-center">
+            <h3 className={`text-lg font-bold mb-6 font-orbitron text-center ${titleColor}`}>
               {spec.tier}
             </h3>
 
             {/* Особенности */}
-            <div className="flex flex-col space-y-2 text-gray-300 text-sm">
-              <p><span className="text-white font-bold">CPU:</span> {spec.cpu}</p>
-              <p><span className="text-white font-bold">GPU:</span> {spec.gpu}</p>
-              <p><span className="text-white font-bold">RAM:</span> {spec.ram}</p>
-              <p><span className="text-white font-bold">Монитор:</span> {spec.monitor}</p>
+            <div className="flex flex-col space-y-3 text-gray-300 text-sm">
+              <div className="flex items-center space-x-2">
+                <span className="font-bold text-white">CPU:</span>
+                <span>{spec.cpu}</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <span className="font-bold text-white">GPU:</span>
+                <span>{spec.gpu}</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <span className="font-bold text-white">RAM:</span>
+                <span>{spec.ram}</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <span className="font-bold text-white">Монитор:</span>
+                <span>{spec.monitor}</span>
+              </div>
 
               {/* Устройства */}
               {device && (
                 <>
-                  <p><span className="text-white font-bold">{device.devices[0].type}:</span> {device.devices[0].name}</p>
-                  <p><span className="text-white font-bold">{device.devices[1].type}:</span> {device.devices[1].name}</p>
-                  <p><span className="text-white font-bold">{device.devices[2].type}:</span> {device.devices[2].name}</p>
+                  <div className="flex items-center space-x-2">
+                    <span className="font-bold text-white">{device.devices[0].type}:</span>
+                    <span>{device.devices[0].name}</span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <span className="font-bold text-white">{device.devices[1].type}:</span>
+                    <span>{device.devices[1].name}</span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <span className="font-bold text-white">{device.devices[2].type}:</span>
+                    <span>{device.devices[2].name}</span>
+                  </div>
                 </>
               )}
             </div>
