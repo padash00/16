@@ -29,17 +29,26 @@ export const metadata: Metadata = {
     generator: 'v0.dev'
 }
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="ru" className={`${orbitron.variable} ${roboto.variable}`}>
       <head>
         <link rel="icon" href="/favicon.ico" />
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        {/* Google Tag Manager */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17035700062"></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'AW-17035700062');
+            `,
+          }}
+        />
       </head>
       <body className="bg-gradient-to-b from-[#0D0D0D] to-[#1A1A1A] text-white min-h-screen">
         {children}
@@ -47,6 +56,7 @@ export default function RootLayout({
     </html>
   )
 }
+
 
 
 function Home() {
