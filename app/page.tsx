@@ -30,6 +30,84 @@ import {
   CpuIcon,
   Joystick,
 } from "lucide-react"
+function HeroSection() {
+  return (
+    <section className="relative py-20 md:py-32 overflow-hidden w-screen max-w-none border-t border-b border-border-color">
+      {/* Слайд фон */}
+      <div className="absolute inset-0 z-0 w-full h-full overflow-hidden">
+        <Image
+          src="/images/f16.png"
+          alt="Игровой клуб F16 Arena фон"
+          fill
+          className="object-cover object-center w-full h-full"
+          sizes="100vw"
+          priority
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-black/80"></div>
+      </div>
+
+      {/* Контент */}
+      <div className="container mx-auto relative z-10 px-6 md:px-12">
+        <div className="max-w-4xl mx-auto text-center">
+          <h1 className="text-3xl md:text-5xl font-orbitron font-bold leading-tight">
+            <span className="neon-blue">НОВЫЙ УРОВЕНЬ </span>
+            <span className="text-white">ГЕЙМИНГА</span>
+          </h1>
+          <p className="mt-4 text-muted-color text-sm md:text-base">
+            Добро пожаловать в мир топового железа, высоких частот и максимального погружения!
+          </p>
+
+          <div className="mt-8 flex justify-center">
+            <a
+              href="https://api.whatsapp.com/send/?phone=77080161720&text=%D0%A5%D0%BE%D1%87%D1%83+%D0%B7%D0%B0%D0%B1%D1%80%D0%BE%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D1%82%D1%8C+F16"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <button className="cyber-button-3d flex items-center gap-2 pulse-effect">
+                ЗАБРОНИРОВАТЬ
+                <ChevronRight className="h-5 w-5" />
+              </button>
+            </a>
+          </div>
+        </div>
+
+        {/* Пульсирующий слайдбар */}
+        <div className="hidden md:block absolute left-8 top-0 bottom-0 w-1 bg-gradient-to-b from-neon-blue via-neon-purple to-neon-red rounded-full animate-pulse-bar"></div>
+
+        {/* Карточки преимуществ */}
+        <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="cyber-card-3d p-4 text-center">
+            <div className="text-2xl md:text-3xl font-bold neon-blue">540Hz</div>
+            <div className="text-xs uppercase text-muted-color mt-1">Максимальная частота</div>
+          </div>
+          <div className="cyber-card-3d p-4 text-center">
+            <div className="text-2xl md:text-3xl font-bold neon-red">24/7</div>
+            <div className="text-xs uppercase text-muted-color mt-1">Режим работы</div>
+          </div>
+          <div className="cyber-card-3d p-4 text-center">
+            <div className="text-2xl md:text-3xl font-bold neon-purple">75"</div>
+            <div className="text-xs uppercase text-muted-color mt-1">Диагональ мониторов</div>
+          </div>
+          <div className="cyber-card-3d p-4 text-center">
+            <div className="text-2xl md:text-3xl font-bold neon-green">1000+</div>
+            <div className="text-xs uppercase text-muted-color mt-1">Игр доступно</div>
+          </div>
+        </div>
+      </div>
+
+      {/* Второй слой картинки (если надо сменять через слайдер) */}
+      <div className="absolute inset-0 z-0 w-full h-full hidden">
+        <Image
+          src="/images/f162.png"
+          alt="Второй фон F16 Arena"
+          fill
+          className="object-cover object-center w-full h-full"
+          sizes="100vw"
+        />
+      </div>
+    </section>
+  )
+}
 
 export default function Home() {
   // Данные для тарифов
