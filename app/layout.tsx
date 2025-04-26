@@ -49,13 +49,37 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             `,
           }}
         />
+
+        {/* Varioqub experiments */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function(e, x, pe, r, i, me, nt){
+                e[i]=e[i]||function(){(e[i].a=e[i].a||[]).push(arguments)},
+                me=x.createElement(pe),me.async=1,me.src=r,nt=x.getElementsByTagName(pe)[0],
+                me.addEventListener('error',function(){
+                  function cb(t){
+                    t=t[t.length-1];
+                    if (typeof t === 'function') t({flags:{}});
+                  };
+                  Array.isArray(e[i].a) && e[i].a.forEach(cb);
+                  e[i]=function(){cb(arguments)};
+                }),
+                nt.parentNode.insertBefore(me,nt)
+              })
+              (window, document, 'script', 'https://abt.s3.yandex.net/expjs/latest/exp.js', 'ymab');
+              ymab('metrika.99885911', 'init');
+            `,
+          }}
+        />
       </head>
       <body className="bg-gradient-to-b from-[#0D0D0D] to-[#1A1A1A] text-white min-h-screen">
         {children}
       </body>
     </html>
-  )
+  );
 }
+
 
 
 
