@@ -1934,3 +1934,8 @@ body::before {
 .animate-pulse {
   animation: pulse 2s infinite;
 }
+.bg-neon-glow {
+  background: linear-gradient(90deg, #ff007f, #00f0ff, #c401ff);
+  box-shadow: 0 0 10px #ff007f, 0 0 20px #00f0ff, 0 0 30px #c401ff;
+  border-radius: 9999px;
+}
