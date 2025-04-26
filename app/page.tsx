@@ -637,9 +637,8 @@ export default function Home() {
           </p>
         </div>
       </section>
-
       {/* Оборудование */}
-<section id="specs" className="py-20 bg-black/30 backdrop-blur-sm">
+<section id="specs" className="py-20 bg-black/30 backdrop-blur-sm cyber-grid">
   <div className="container mx-auto px-4">
     <h2
       className="text-3xl md:text-4xl font-bold text-center mb-12 font-orbitron glitch"
@@ -652,18 +651,22 @@ export default function Home() {
       {specsTiers.map((spec, index) => {
         const device = devicesTiers.find(d => d.tier === spec.tier);
 
+        // Определение цвета рамки по tier
+        let borderColor = "neon-border-cyan"; // по умолчанию
+        if (spec.tier.includes("Standart") && !spec.tier.includes("Premium")) borderColor = "neon-border-red";
+        if (spec.tier.includes("Standart PRO")) borderColor = "neon-border-cyan";
+        if (spec.tier.includes("Standart Premium")) borderColor = "neon-border-purple";
+        if (spec.tier.includes("VIP")) borderColor = "neon-border-yellow";
+        if (spec.tier.includes("PRO")) borderColor = "neon-border-green";
+
         return (
           <div
             key={index}
-            className="relative rounded-lg overflow-hidden transition-transform hover:-translate-y-1 duration-300 fade-in"
+            className={`relative rounded-lg overflow-hidden transition-transform hover:-translate-y-1 duration-300 fade-in ${borderColor}`}
             style={{ animationDelay: `${index * 0.1}s` }}
           >
-            {/* Неоновая рамка */}
-            <div className="absolute inset-0 p-0.5 rounded-lg neon-border-cyan opacity-70"></div>
-
-            {/* Содержание карточки */}
             <div className="relative bg-black/50 backdrop-blur-sm p-6 rounded-lg h-full flex flex-col">
-              <h3 className="text-xl font-bold mb-4 font-orbitron neon-cyan text-center">{spec.tier}</h3>
+              <h3 className="text-xl font-bold mb-4 font-orbitron text-center">{spec.tier}</h3>
 
               {/* Характеристики */}
               <ul className="space-y-2 text-muted-color text-sm mb-4">
@@ -676,9 +679,9 @@ export default function Home() {
               {/* Устройства */}
               {device && (
                 <ul className="space-y-2 text-muted-color text-sm">
-                  <li><span className="font-bold text-white">Мышь:</span> {device.mouse}</li>
-                  <li><span className="font-bold text-white">Клавиатура:</span> {device.keyboard}</li>
-                  <li><span className="font-bold text-white">Наушники:</span> {device.headset}</li>
+                  <li><span className="font-bold text-white">{device.devices[0].type}:</span> {device.devices[0].name}</li>
+                  <li><span className="font-bold text-white">{device.devices[1].type}:</span> {device.devices[1].name}</li>
+                  <li><span className="font-bold text-white">{device.devices[2].type}:</span> {device.devices[2].name}</li>
                 </ul>
               )}
             </div>
@@ -688,7 +691,6 @@ export default function Home() {
     </div>
   </div>
 </section>
-
 
       {/* Секция галереи */}
       <section id="gallery" className="py-20 cyber-mesh">
