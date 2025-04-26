@@ -2,6 +2,7 @@
 import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
+import { ChevronRight } from "lucide-react"
 import {
   ChevronRight,
   Instagram,
@@ -404,92 +405,85 @@ export default function Home() {
 </header>
 
 
-      {/* Главный экран */}
-      <section className="relative py-20 md:py-32 overflow-hidden border-t border-b border-border-color scanline hologram grid-overlay w-screen max-w-none">
-        <div className="absolute inset-0 z-0 w-full h-full overflow-hidden">
-          <Image
-            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/DSCF3468%20%282%29.png-kkVKtNtjpSsnmvkmiUL230RwgQpTSX.jpeg"
-            alt="Игровой компьютер F16 Arena с RGB подсветкой"
-            fill
-            className="object-cover object-center w-full h-full"
-            sizes="100vw"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/70"></div>
-        </div>
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-3xl mx-auto">
-            
-            <h2 className="text-4xl md:text-6xl font-orbitron font-bold mb-6 leading-tight">
-              <span className="neon-blue">ИГРОВОЙ</span> КЛУБ <span className="neon-red">НОВОГО</span> УРОВНЯ
-            </h2>
-            
-            <div className="flex flex-wrap gap-4">
+     export default function HeroSection() {
+  return (
+    <section className="relative py-20 md:py-32 overflow-hidden w-screen max-w-none border-t border-b border-border-color">
+      {/* Слайд фон */}
+      <div className="absolute inset-0 z-0 w-full h-full overflow-hidden">
+        <Image
+          src="/images/f16.png"
+          alt="Игровой клуб F16 Arena фон"
+          fill
+          className="object-cover object-center w-full h-full"
+          sizes="100vw"
+          priority
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-black/80"></div>
+      </div>
+
+      {/* Контент */}
+      <div className="container mx-auto relative z-10 px-6 md:px-12">
+        <div className="max-w-4xl mx-auto text-center">
+          <h1 className="text-3xl md:text-5xl font-orbitron font-bold leading-tight">
+            <span className="neon-blue">НОВЫЙ УРОВЕНЬ </span>
+            <span className="text-white">ГЕЙМИНГА</span>
+          </h1>
+          <p className="mt-4 text-muted-color text-sm md:text-base">
+            Добро пожаловать в мир топового железа, высоких частот и максимального погружения!
+          </p>
+
+          <div className="mt-8 flex justify-center">
             <a
-              href="https://api.whatsapp.com/send/?phone=77080161720&text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%0A%0A%D0%9F%D0%B8%D1%88%D1%83+%D0%B8%D0%B7+%D0%BF%D1%80%D0%B8%D0%BB%D0%BE%D0%B6%D0%B5%D0%BD%D0%B8%D1%8F+2%D0%93%D0%98%D0%A1.%0A%0A&type=phone_number&app_absent=0"
+              href="https://api.whatsapp.com/send/?phone=77080161720&text=%D0%A5%D0%BE%D1%87%D1%83+%D0%B7%D0%B0%D0%B1%D1%80%D0%BE%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D1%82%D1%8C+F16"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <button className="cyber-button-3d flex items-center pulse-effect">
+              <button className="cyber-button-3d flex items-center gap-2 pulse-effect">
                 ЗАБРОНИРОВАТЬ
-                <ChevronRight className="ml-2 h-5 w-5" />
+                <ChevronRight className="h-5 w-5" />
               </button>
             </a>
-            </div>
-
-            <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-              <div className="text-center cyber-card-3d p-4 cyber-frame">
-                <div className="text-3xl font-bold neon-blue font-orbitron mb-2">540Hz</div>
-                <div className="text-xs uppercase tracking-wider text-muted-color">Максимальная частота</div>
-              </div>
-              <div className="text-center cyber-card-3d p-4 cyber-frame">
-                <div className="text-3xl font-bold neon-red font-orbitron mb-2">24/7</div>
-                <div className="text-xs uppercase tracking-wider text-muted-color">Режим работы</div>
-              </div>
-              <div className="text-center cyber-card-3d p-4 cyber-frame">
-                <div className="text-3xl font-bold neon-purple font-orbitron mb-2">75"</div>
-                <div className="text-xs uppercase tracking-wider text-muted-color">Максимальная диагональ</div>
-              </div>
-              <div className="text-center cyber-card-3d p-4 cyber-frame">
-                <div className="text-3xl font-bold neon-green font-orbitron mb-2">1000+</div>
-                <div className="text-xs uppercase tracking-wider text-muted-color">Игр доступно</div>
-              </div>
-            </div>
           </div>
         </div>
 
-        {/* Анимированные частицы */}
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-1/4 left-1/4 w-2 h-2 rounded-full bg-neon-blue animate-pulse"></div>
-          <div className="absolute top-3/4 left-1/3 w-2 h-2 rounded-full bg-neon-red animate-pulse"></div>
-          <div className="absolute top-1/2 left-2/3 w-2 h-2 rounded-full bg-neon-purple animate-pulse"></div>
-          <div className="absolute top-1/3 left-3/4 w-2 h-2 rounded-full bg-neon-yellow animate-pulse"></div>
-          <div className="absolute top-2/3 left-1/4 w-2 h-2 rounded-full bg-neon-green animate-pulse"></div>
-        </div>
-      </section>
+        {/* Пульсирующий слайдбар */}
+        <div className="hidden md:block absolute left-8 top-0 bottom-0 w-1 bg-gradient-to-b from-neon-blue via-neon-purple to-neon-red rounded-full animate-pulse-bar"></div>
 
-      {/* Секция преимуществ */}
-      <section className="py-16 bg-darker-bg/90 backdrop-blur-sm">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {benefits.map((benefit, index) => (
-              <div
-                key={index}
-                className={`bg-darker-bg/80 backdrop-blur-sm border border-neon-${benefit.color} rounded-lg overflow-hidden fade-in`}
-                style={{ animationDelay: `${index * 0.2}s` }}
-              >
-                <div className="p-6 h-full flex flex-col items-center text-center">
-                  <div className={`mb-4 p-3 rounded-full bg-darker-bg border border-neon-${benefit.color}`}>
-                    {benefit.icon}
-                  </div>
-                  <h3 className={`text-xl font-orbitron font-bold mb-3 neon-${benefit.color}`}>{benefit.title}</h3>
-                  <p className="text-muted-color">{benefit.description}</p>
-                </div>
-              </div>
-            ))}
+        {/* Карточки преимуществ */}
+        <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="cyber-card-3d p-4 text-center">
+            <div className="text-2xl md:text-3xl font-bold neon-blue">540Hz</div>
+            <div className="text-xs uppercase text-muted-color mt-1">Максимальная частота</div>
+          </div>
+          <div className="cyber-card-3d p-4 text-center">
+            <div className="text-2xl md:text-3xl font-bold neon-red">24/7</div>
+            <div className="text-xs uppercase text-muted-color mt-1">Режим работы</div>
+          </div>
+          <div className="cyber-card-3d p-4 text-center">
+            <div className="text-2xl md:text-3xl font-bold neon-purple">75"</div>
+            <div className="text-xs uppercase text-muted-color mt-1">Диагональ мониторов</div>
+          </div>
+          <div className="cyber-card-3d p-4 text-center">
+            <div className="text-2xl md:text-3xl font-bold neon-green">1000+</div>
+            <div className="text-xs uppercase text-muted-color mt-1">Игр доступно</div>
           </div>
         </div>
-      </section>
+      </div>
+
+      {/* Второй слой картинки (если надо сменять через слайдер) */}
+      <div className="absolute inset-0 z-0 w-full h-full hidden">
+        <Image
+          src="/images/f162.png"
+          alt="Второй фон F16 Arena"
+          fill
+          className="object-cover object-center w-full h-full"
+          sizes="100vw"
+        />
+      </div>
+    </section>
+  );
+}
+
 
       {/* Секция тарифов */}
       <section id="pricing" className="py-20 cyber-mesh">
