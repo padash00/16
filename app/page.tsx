@@ -747,12 +747,7 @@ export default function Home() {
     </div>
   </div>
 </section>
-      <div className="relative flex justify-center my-20">
-  <div className="w-48 h-1 bg-neon-glow"></div>
-</div>
-
-
-      {/* Секция галереи */}
+           {/* Секция галереи */}
       <section id="gallery" className="py-20 cyber-mesh">
         <div className="container mx-auto px-4">
           <div className="mb-12">
