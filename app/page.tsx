@@ -1042,24 +1042,68 @@
            </div>
          </div>
        </section>
- 
-       {/* Карта */}
-       <section className="py-10">
-         <div className="container mx-auto px-4">
-           <div className="rounded overflow-hidden cyber-card-3d no-hover cyber-frame">
-             <iframe
-               src="https://yandex.ru/map-widget/v1/?z=12&ol=biz&oid=138491615047"
-               width="100%"
-               height="400"
-               frameBorder="0"
-               title="F16 Arena Местоположение"
-               className="w-full"
-               loading="lazy"
-             ></iframe>
-           </div>
-         </div>
-       </section>
-      <>
+      {/* Карта */}
+<section className="py-10">
+  <div className="container mx-auto px-4">
+    <div className="rounded overflow-hidden cyber-card-3d no-hover cyber-frame">
+      <iframe
+        src="https://yandex.ru/map-widget/v1/?z=12&ol=biz&oid=138491615047"
+        width="100%"
+        height="400"
+        frameBorder="0"
+        title="F16 Arena Местоположение"
+        className="w-full"
+        loading="lazy"
+      ></iframe>
+    </div>
+  </div>
+</section>
+
+{/* Подвал */}
+<footer className="py-10 border-t border-border-color">
+  <div className="container mx-auto px-4">
+    <div className="flex flex-col md:flex-row justify-between items-center">
+      <div className="mb-4 md:mb-0 flex items-center">
+        <div className="mr-4 font-orbitron font-bold text-xl neon-red cyber-glitch-text">F16 ARENA</div>
+        <div>
+          <a href="mailto:info@f16arena.kz" className="hover:text-neon-blue transition-colors mr-4">
+            f16arena@gmail.com
+          </a>
+          <a href="tel:+77080161720" className="hover:text-neon-blue transition-colors">
+            +7708 016 17 20
+          </a>
+        </div>
+      </div>
+      <div className="flex space-x-4">
+        <a
+          href="https://www.instagram.com/f16arena_/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="cyber-icon"
+        >
+          <Instagram className="h-5 w-5" />
+        </a>
+        <a
+          href="https://www.youtube.com/@F16arena"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="cyber-icon"
+        >
+          <Youtube className="h-5 w-5" />
+        </a>
+        <a href="https://t.me/f16arena" target="_blank" rel="noopener noreferrer" className="cyber-icon">
+          <MessageCircle className="h-5 w-5" />
+        </a>
+      </div>
+    </div>
+    <div className="text-center mt-8 text-sm text-muted-color">
+      &copy; {new Date().getFullYear()} F16 ARENA. ВСЕ ПРАВА ЗАЩИЩЕНЫ.
+    </div>
+  </div>
+</footer>
+
+{/* Скрипты счётчиков */}
+<>
   {/* Yandex.Metrika counter */}
   <script type="text/javascript" dangerouslySetInnerHTML={{
     __html: `(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
@@ -1074,9 +1118,18 @@
       ecommerce:"dataLayer"
     });`
   }} />
-  <noscript><div><img src="https://mc.yandex.ru/watch/101463564" style={{position:"absolute", left:"-9999px"}} alt="" /></div></noscript>
-  {/* /Yandex.Metrika counter */}
+  <noscript>
+    <div>
+      <img src="https://mc.yandex.ru/watch/101463564" style={{position:"absolute", left:"-9999px"}} alt="" />
+    </div>
+  </noscript>
+
+  {/* Google Ads Conversion Tag */}
+  <script type="text/javascript" dangerouslySetInnerHTML={{
+    __html: `gtag('event', 'conversion', {'send_to': 'AW-17035700062/UK1FCJbK9b4aEN7OoLs_'});`
+  }} />
 </>
+</main>  {/* <-- Закрытие твоего main, обязательно! */}
 
        {/* Подвал */}
        <footer className="py-10 border-t border-border-color">
