@@ -34,8 +34,8 @@
    // Данные для тарифов
    const pricingTiers = [
      {
-       name: "Стандарт",
-       hourly: "600тг/час",
+       name: "Standart",
+       hourly: "700тг/час",
        package1: "1200тг/2+1",
        package2: "1800тг/3+2",
        night: "2200тг/ночь",
@@ -45,8 +45,8 @@
        features: ["165Hz Монитор", "GTX1660 Super", "16GB RAM"],
      },
      {
-       name: "Стандарт PRO",
-       hourly: "800тг/час",
+       name: "Standart PRO",
+       hourly: "1000тг/час",
        package1: "1600тг/2+1",
        package2: "2400тг/3+2",
        night: "2800тг/ночь",
@@ -56,8 +56,8 @@
        features: ["240Hz Монитор", "RTX 3060 8GB", "16GB RAM"],
      },
      {
-       name: "Стандарт Premium",
-       hourly: "1000тг/час",
+       name: "Standart Premium",
+       hourly: "1200тг/час",
        package1: "2000тг/2+1",
        package2: "3000тг/3+2",
        night: "4000тг/ночь",
@@ -104,7 +104,7 @@
        hourly: "1500тг/час",
        package1: "3000тг/2+1",
        package2: "4500тг/3+2",
-       features: ["4K HDR+", "DualSense Pro", "PS5 Pro+", "Все игры", "Премиум звук"],
+       features: ["4K HDR+", "DualSense Pro", "PS5", "Все игры", "Премиум звук"],
      },
    ]
  
