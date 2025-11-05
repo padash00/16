@@ -1,5 +1,5 @@
 "use client"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import {
@@ -22,11 +22,11 @@ import {
   Flame,
   Award,
   Joystick,
-  Headset, // используем как VR-иконку, стабильна во всех версиях lucide-react
+  Headset,
 } from "lucide-react"
 
 export default function Home() {
-  // ===== ТАРИФЫ (актуальные характеристики и количества) =====
+  // ===== ТАРИФЫ =====
   const pricingTiers = [
     {
       name: "Standart",
@@ -78,48 +78,12 @@ export default function Home() {
     },
   ] as const
 
-  // ===== ПК-конфиги (актуальные) =====
+  // ===== ПК-конфиги =====
   const specsTiers = [
-    {
-      tier: "Standart",
-      cpu: "i5-12400F",
-      gpu: "RTX 4060 8GB",
-      ram: "16GB",
-      monitor: "240Hz",
-      color: "red",
-      icon: <Cpu className="h-5 w-5" />,
-      count: 25,
-    },
-    {
-      tier: "Standart Premium",
-      cpu: "i5-13400F",
-      gpu: "RTX 5060 8GB",
-      ram: "16GB",
-      monitor: "280Hz",
-      color: "purple",
-      icon: <Code className="h-5 w-5" />,
-      count: 30,
-    },
-    {
-      tier: "VIP",
-      cpu: "i7-13700F",
-      gpu: "RTX 4070 Super 12GB",
-      ram: "32GB",
-      monitor: "380Hz",
-      color: "yellow",
-      icon: <Flame className="h-5 w-5" />,
-      count: 6,
-    },
-    {
-      tier: "PRO",
-      cpu: "Ryzen 7 7800X3D",
-      gpu: "RTX 5070",
-      ram: "32GB 6000MHz",
-      monitor: "540Hz",
-      color: "green",
-      icon: <Award className="h-5 w-5" />,
-      count: 5,
-    },
+    { tier: "Standart", cpu: "i5-12400F", gpu: "RTX 4060 8GB", ram: "16GB", monitor: "240Hz", color: "red", icon: <Cpu className="h-5 w-5" />, count: 25 },
+    { tier: "Standart Premium", cpu: "i5-13400F", gpu: "RTX 5060 8GB", ram: "16GB", monitor: "280Hz", color: "purple", icon: <Code className="h-5 w-5" />, count: 30 },
+    { tier: "VIP", cpu: "i7-13700F", gpu: "RTX 4070 Super 12GB", ram: "32GB", monitor: "380Hz", color: "yellow", icon: <Flame className="h-5 w-5" />, count: 6 },
+    { tier: "PRO", cpu: "Ryzen 7 7800X3D", gpu: "RTX 5070", ram: "32GB 6000MHz", monitor: "540Hz", color: "green", icon: <Award className="h-5 w-5" />, count: 5 },
   ] as const
 
   // ===== Периферия =====
@@ -127,7 +91,7 @@ export default function Home() {
     {
       tier: "Standart",
       devices: [
-        { type: "Мышь", name: "Asus ROG )", icon: <Mouse className="h-5 w-5" /> },
+        { type: "Мышь", name: "Asus ROG", icon: <Mouse className="h-5 w-5" /> },
         { type: "Клавиатура", name: "RK ROYAL KLUDGE 87", icon: <Keyboard className="h-5 w-5" /> },
         { type: "Наушники", name: "HyperX Cloud 2", icon: <Headphones className="h-5 w-5" /> },
       ],
@@ -145,7 +109,7 @@ export default function Home() {
     {
       tier: "VIP",
       devices: [
-        { type: "Мышь", name: "Logitech SuperLight  (Wireless)", icon: <Mouse className="h-5 w-5" /> },
+        { type: "Мышь", name: "Logitech SuperLight (Wireless)", icon: <Mouse className="h-5 w-5" /> },
         { type: "Клавиатура", name: "Dark Project", icon: <Keyboard className="h-5 w-5" /> },
         { type: "Наушники", name: "Logitech G PRO SE", icon: <Headphones className="h-5 w-5" /> },
       ],
@@ -162,12 +126,11 @@ export default function Home() {
     },
   ] as const
 
-  // ===== F16 EXTRA — карточки зон (без цен — не задавались) =====
+  // ===== F16 EXTRA =====
   const extraZones = [
     {
       name: "SimRacing",
       color: "green",
-      // SteeringWheel есть не во всех версиях lucide-react. Чтобы не ловить ERESOLVE — используем Joystick.
       icon: <Joystick className="h-5 w-5" />,
       bullets: ["Руль, педали, кресло-ковш", "VR-ready", "Assetto Corsa / iRacing / WRC"],
       cta: "ЗАБРОНИРОВАТЬ SIMRACING",
@@ -175,7 +138,7 @@ export default function Home() {
     {
       name: "VR",
       color: "blue",
-      icon: <Headset className="h-5 w-5" />, // стабильная VR-иконка
+      icon: <Headset className="h-5 w-5" />,
       bullets: ["VR-квесты и аркады", "Подходит для компании", "Запись клипов и фото"],
       cta: "ЗАБРОНИРОВАТЬ VR",
     },
@@ -188,7 +151,7 @@ export default function Home() {
     },
   ] as const
 
-  // фоновые частицы
+  // ===== ДЕКОР: частицы =====
   const particles = Array.from({ length: 50 }, (_, i) => ({
     id: i,
     size: Math.random() * 3 + 1,
@@ -199,27 +162,71 @@ export default function Home() {
     color: ["neon-blue", "neon-red", "neon-purple", "neon-yellow", "neon-green"][Math.floor(Math.random() * 5)],
   }))
 
-  const [selectedImage, setSelectedImage] = useState<{
-    src: string
-    alt: string
-    title: string
-  } | null>(null)
+  const [selectedImage, setSelectedImage] = useState<{ src: string; alt: string; title: string } | null>(null)
 
   const colorOf = (tierName: string) => {
     if (tierName.includes("Standart") && !tierName.includes("Premium")) return "red"
     if (tierName.includes("Standart Premium")) return "purple"
     if (tierName.includes("VIP")) return "yellow"
     if (tierName.includes("PRO")) return "green"
-    return "cyan"
+    return "blue"
   }
+
+  // ===== REVEAL + TILT =====
+  useEffect(() => {
+    if (typeof window === "undefined") return
+
+    // Reveal on scroll
+    const els = Array.from(document.querySelectorAll<HTMLElement>(".reveal"))
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("in")
+            io.unobserve(e.target)
+          }
+        })
+      },
+      { threshold: 0.15 }
+    )
+    els.forEach((el) => io.observe(el))
+
+    // Lightweight 3D tilt
+    const tiltTargets = Array.from(document.querySelectorAll<HTMLElement>(".tilt-3d"))
+    const handleMove = (e: MouseEvent) => {
+      const t = e.currentTarget as HTMLElement
+      const rect = t.getBoundingClientRect()
+      const x = (e.clientX - rect.left) / rect.width
+      const y = (e.clientY - rect.top) / rect.height
+      const rx = (y - 0.5) * -6
+      const ry = (x - 0.5) * 6
+      t.style.transform = `translateY(-6px) rotateX(${rx}deg) rotateY(${ry}deg)`
+    }
+    const handleLeave = (e: MouseEvent) => {
+      const t = e.currentTarget as HTMLElement
+      t.style.transform = ""
+    }
+    tiltTargets.forEach((t) => {
+      t.addEventListener("mousemove", handleMove as any)
+      t.addEventListener("mouseleave", handleLeave as any)
+    })
+
+    return () => {
+      io.disconnect()
+      tiltTargets.forEach((t) => {
+        t.removeEventListener("mousemove", handleMove as any)
+        t.removeEventListener("mouseleave", handleLeave as any)
+      })
+    }
+  }, [])
 
   return (
     <main className="min-h-screen digital-noise matrix-effect">
-      {/* Декор */}
-      <div className="fixed top-0 left-0 w-full h-0.5 bg-neon-blue opacity-60"></div>
-      <div className="fixed bottom-0 left-0 w-full h-0.5 bg-neon-red opacity-60"></div>
-      <div className="fixed top-0 left-0 h-full w-0.5 bg-neon-purple opacity-60"></div>
-      <div className="fixed top-0 right-0 h-full w-0.5 bg-neon-green opacity-60"></div>
+      {/* Декор-границы */}
+      <div className="fixed top-0 left-0 w-full h-0.5 bg-neon-blue opacity-60" />
+      <div className="fixed bottom-0 left-0 w-full h-0.5 bg-neon-red opacity-60" />
+      <div className="fixed top-0 left-0 h-full w-0.5 bg-neon-purple opacity-60" />
+      <div className="fixed top-0 right-0 h-full w-0.5 bg-neon-green opacity-60" />
 
       {/* Частицы */}
       <div className="cyber-particles">
@@ -239,29 +246,37 @@ export default function Home() {
         ))}
       </div>
 
-      {/* Линии */}
-      <div className="fixed top-[20%] left-[10%] h-[60%] w-0.5 bg-neon-blue opacity-20 data-stream"></div>
-      <div className="fixed top-[15%] left-[20%] h-[70%] w-0.5 bg-neon-red opacity-20 data-stream"></div>
-      <div className="fixed top-[25%] left-[30%] h-[50%] w-0.5 bg-neon-purple opacity-20 data-stream"></div>
-      <div className="fixed top-[10%] left-[40%] h-[80%] w-0.5 bg-neon-yellow opacity-20 data-stream"></div>
-      <div className="fixed top-[30%] left-[50%] h-[40%] w-0.5 bg-neon-green opacity-20 data-stream"></div>
-      <div className="fixed top-[20%] left-[60%] h-[60%] w-0.5 bg-neon-blue opacity-20 data-stream"></div>
-      <div className="fixed top-[15%] left-[70%] h-[70%] w-0.5 bg-neon-red opacity-20 data-stream"></div>
-      <div className="fixed top-[25%] left-[80%] h-[50%] w-0.5 bg-neon-purple opacity-20 data-stream"></div>
-      <div className="fixed top-[10%] left-[90%] h-[80%] w-0.5 bg-neon-yellow opacity-20 data-stream"></div>
+      {/* Вертикальные data-stream линии */}
+      {[
+        { t: "20%", l: "10%", h: "60%", c: "blue" },
+        { t: "15%", l: "20%", h: "70%", c: "red" },
+        { t: "25%", l: "30%", h: "50%", c: "purple" },
+        { t: "10%", l: "40%", h: "80%", c: "yellow" },
+        { t: "30%", l: "50%", h: "40%", c: "green" },
+        { t: "20%", l: "60%", h: "60%", c: "blue" },
+        { t: "15%", l: "70%", h: "70%", c: "red" },
+        { t: "25%", l: "80%", h: "50%", c: "purple" },
+        { t: "10%", l: "90%", h: "80%", c: "yellow" },
+      ].map((v, i) => (
+        <div
+          key={i}
+          className={`fixed top-[${v.t}] left-[${v.l}] h-[${v.h}] w-0.5 bg-neon-${v.c} opacity-20 data-stream`}
+          aria-hidden
+        />
+      ))}
 
       {/* Шапка */}
       <header className="container mx-auto px-4 py-6 relative z-10">
         <div className="flex flex-col gap-6 md:flex-row md:justify-between md:items-center">
-          <div className="cyber-corner cyber-shadow text-center md:text-left">
-            <h1 className="text-3xl md:text-5xl font-orbitron font-bold tracking-wider cyber-glitch-text" data-text="F16 ARENA">
+          <div className="cyber-corner cyber-shadow text-center md:text-left reveal" data-stagger="1">
+            <h1 className="text-3xl md:text-5xl font-orbitron font-bold tracking-wider glitch" data-text="F16 ARENA">
               F16 ARENA
             </h1>
             <p className="text-sm md:text-base text-muted-color tracking-wide cyber-text">КИБЕРСПОРТИВНЫЙ КЛУБ</p>
-            <div className="cyber-status mt-2"></div>
+            <div className="cyber-status mt-2" />
           </div>
 
-          <nav className="bg-darker-bg/80 backdrop-blur-sm p-3 border border-border-color cyber-frame rounded-md">
+          <nav className="bg-darker-bg/80 backdrop-blur-sm p-3 border border-border-color cyber-frame rounded-md reveal" data-stagger="2">
             <ul className="flex flex-col md:flex-row justify-center items-center gap-2 md:gap-4">
               <li><Link href="#" className="cyber-nav-item active">ГЛАВНАЯ</Link></li>
               <li><Link href="#pricing" className="cyber-nav-item">ТАРИФЫ</Link></li>
@@ -275,7 +290,7 @@ export default function Home() {
         </div>
       </header>
 
-      {/* Главный экран */}
+      {/* Hero */}
       <section className="relative py-20 md:py-32 overflow-hidden border-t border-b border-border-color scanline hologram grid-overlay w-screen max-w-none">
         <div className="absolute inset-0 z-0 w-full h-full overflow-hidden">
           <Image
@@ -286,21 +301,22 @@ export default function Home() {
             sizes="100vw"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/70"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/70" />
         </div>
+
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-4xl md:text-6xl font-orbitron font-bold mb-6 leading-tight">
+            <h2 className="text-4xl md:text-6xl font-orbitron font-bold mb-6 leading-tight reveal" data-stagger="1">
               <span className="neon-blue">ИГРОВОЙ</span> КЛУБ <span className="neon-red">НОВОГО</span> УРОВНЯ
             </h2>
 
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-wrap gap-4 reveal" data-stagger="2">
               <a
                 href="https://api.whatsapp.com/send/?phone=77080161720&text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%0A%0A%D0%9F%D0%B8%D1%88%D1%83+%D0%B8%D0%B7+2GIS&type=phone_number&app_absent=0"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <button className="cyber-button-3d flex items-center pulse-effect">
+                <button className="cyber-button-3d flex items-center pulse-effect ripple">
                   ЗАБРОНИРОВАТЬ
                   <ChevronRight className="ml-2 h-5 w-5" />
                 </button>
@@ -308,33 +324,28 @@ export default function Home() {
             </div>
 
             <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-              <div className="text-center cyber-card-3d p-4 cyber-frame">
-                <div className="text-3xl font-bold neon-blue font-orbitron mb-2">540Hz</div>
-                <div className="text-xs uppercase tracking-wider text-muted-color">Максимальная частота</div>
-              </div>
-              <div className="text-center cyber-card-3d p-4 cyber-frame">
-                <div className="text-3xl font-bold neon-red font-orbitron mb-2">24/7</div>
-                <div className="text-xs uppercase tracking-wider text-muted-color">Режим работы</div>
-              </div>
-              <div className="text-center cyber-card-3d p-4 cyber-frame">
-                <div className="text-3xl font-bold neon-purple font-orbitron mb-2">75"</div>
-                <div className="text-xs uppercase tracking-wider text-muted-color">Макс. диагональ</div>
-              </div>
-              <div className="text-center cyber-card-3d p-4 cyber-frame">
-                <div className="text-3xl font-bold neon-green font-orbitron mb-2">1000+</div>
-                <div className="text-xs uppercase tracking-wider text-muted-color">Игр доступно</div>
-              </div>
+              {[
+                { label: "Максимальная частота", value: "540Hz", color: "blue" },
+                { label: "Режим работы", value: "24/7", color: "red" },
+                { label: "Макс. диагональ", value: '75"', color: "purple" },
+                { label: "Игр доступно", value: "1000+", color: "green" },
+              ].map((s, i) => (
+                <div key={i} className="text-center cyber-card-3d p-4 cyber-frame shimmer reveal tilt-3d" data-stagger={i + 1}>
+                  <div className={`text-3xl font-bold neon-${s.color} font-orbitron mb-2`}>{s.value}</div>
+                  <div className="text-xs uppercase tracking-wider text-muted-color">{s.label}</div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
 
         {/* точки */}
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-1/4 left-1/4 w-2 h-2 rounded-full bg-neon-blue animate-pulse"></div>
-          <div className="absolute top-3/4 left-1/3 w-2 h-2 rounded-full bg-neon-red animate-pulse"></div>
-          <div className="absolute top-1/2 left-2/3 w-2 h-2 rounded-full bg-neon-purple animate-pulse"></div>
-          <div className="absolute top-1/3 left-3/4 w-2 h-2 rounded-full bg-neon-yellow animate-pulse"></div>
-          <div className="absolute top-2/3 left-1/4 w-2 h-2 rounded-full bg-neon-green animate-pulse"></div>
+          <div className="absolute top-1/4 left-1/4 w-2 h-2 rounded-full bg-neon-blue animate-pulse" />
+          <div className="absolute top-3/4 left-1/3 w-2 h-2 rounded-full bg-neon-red animate-pulse" />
+          <div className="absolute top-1/2 left-2/3 w-2 h-2 rounded-full bg-neon-purple animate-pulse" />
+          <div className="absolute top-1/3 left-3/4 w-2 h-2 rounded-full bg-neon-yellow animate-pulse" />
+          <div className="absolute top-2/3 left-1/4 w-2 h-2 rounded-full bg-neon-green animate-pulse" />
         </div>
       </section>
 
@@ -342,16 +353,18 @@ export default function Home() {
       <section id="pricing" className="py-20 cyber-mesh">
         <div className="container mx-auto px-4">
           <div className="mb-12">
-            <h2 className="cyber-heading text-3xl md:text-4xl font-orbitron font-bold mb-4 cyber-title">ВЫБЕРИ СВОЮ ЗОНУ</h2>
-            <p className="text-muted-color max-w-2xl ml-4">Подбери оптимальный тариф для твоей игровой сессии</p>
+            <h2 className="cyber-heading text-3xl md:text-4xl font-orbitron font-bold mb-4 cyber-title reveal" data-stagger="1">
+              ВЫБЕРИ СВОЮ ЗОНУ
+            </h2>
+            <p className="text-muted-color max-w-2xl ml-4 reveal" data-stagger="2">Подбери оптимальный тариф для твоей игровой сессии</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {pricingTiers.map((tier, index) => (
               <div
                 key={tier.name}
-                className={`bg-darker-bg/80 backdrop-blur-sm border border-neon-${tier.color} rounded-lg overflow-hidden fade-in digital-distortion`}
-                style={{ animationDelay: `${index * 0.1}s` }}
+                className={`bg-darker-bg/80 backdrop-blur-sm border border-neon-${tier.color} rounded-lg overflow-hidden digital-distortion reveal tilt-3d`}
+                data-stagger={(index % 5) + 1}
               >
                 <div className="p-6 h-full flex flex-col">
                   <div className="flex justify-between items-start mb-4">
@@ -359,37 +372,27 @@ export default function Home() {
                       <div className={`mr-2 text-neon-${tier.color}`}>{tier.icon}</div>
                       <h3 className={`text-xl font-orbitron font-bold neon-${tier.color}`}>{tier.name}</h3>
                     </div>
-                    <span className="text-xs bg-darker-bg px-2 py-1 border border-border-color cyber-frame">
-                      {tier.count} ПК
-                    </span>
+                    <span className="text-xs bg-darker-bg px-2 py-1 border border-border-color cyber-frame">{tier.count} ПК</span>
                   </div>
 
                   <div className="space-y-4 mb-6 flex-grow">
                     <div className={`text-2xl font-bold neon-${tier.color} font-orbitron`}>{tier.hourly}</div>
-                    <div className={`cyber-divider-${tier.color}`}></div>
+                    <div className={`cyber-divider-${tier.color}`} />
                     <div className="space-y-2">
                       <div className="flex items-center justify-between">
-                        <span className="text-muted-color flex items-center">
-                          <Package className="h-4 w-4 mr-1 opacity-70" /> Пакет 2+1:
-                        </span>
+                        <span className="text-muted-color flex items-center"><Package className="h-4 w-4 mr-1 opacity-70" /> Пакет 2+1:</span>
                         <span>{tier.package1}</span>
                       </div>
                       <div className="flex items-center justify-between">
-                        <span className="text-muted-color flex items-center">
-                          <Package className="h-4 w-4 mr-1 opacity-70" /> Пакет 3+2:
-                        </span>
+                        <span className="text-muted-color flex items-center"><Package className="h-4 w-4 mr-1 opacity-70" /> Пакет 3+2:</span>
                         <span>{tier.package2}</span>
                       </div>
                       <div className="flex items-center justify-between">
-                        <span className="text-muted-color flex items-center">
-                          <Moon className="h-4 w-4 mr-1 opacity-70" /> Ночь:
-                        </span>
+                        <span className="text-muted-color flex items-center"><Moon className="h-4 w-4 mr-1 opacity-70" /> Ночь:</span>
                         <span>{tier.night}</span>
                       </div>
                       <div className="flex items-center justify-between">
-                        <span className="text-muted-color flex items-center">
-                          <Sun className="h-4 w-4 mr-1 opacity-70" /> День:
-                        </span>
+                        <span className="text-muted-color flex items-center"><Sun className="h-4 w-4 mr-1 opacity-70" /> День:</span>
                         <span>{tier.day}</span>
                       </div>
                     </div>
@@ -399,7 +402,7 @@ export default function Home() {
                       <ul className="space-y-1">
                         {tier.features.map((f, idx) => (
                           <li key={idx} className="flex items-center text-sm">
-                            <span className={`h-1.5 w-1.5 bg-neon-${tier.color} rounded-full mr-2`}></span>
+                            <span className={`h-1.5 w-1.5 bg-neon-${tier.color} rounded-full mr-2`} />
                             {f}
                           </li>
                         ))}
@@ -408,7 +411,7 @@ export default function Home() {
                   </div>
 
                   <a href="https://api.whatsapp.com/send/?phone=77080161720&text=%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%B1%D1%80%D0%BE%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D1%82%D1%8C%20%D0%BF%D0%BA&type=phone_number&app_absent=0">
-                    <button className={`cyber-button cyber-button-${tier.color} w-full`}>ВЫБРАТЬ</button>
+                    <button className={`cyber-button cyber-button-${tier.color} w-full ripple`}>ВЫБРАТЬ</button>
                   </a>
                 </div>
               </div>
@@ -417,85 +420,53 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Оборудование и устройства */}
+      {/* Оборудование */}
       <section id="equipment" className="py-20 cyber-mesh">
         <div className="container mx-auto px-4">
           <div className="mb-12">
-            <h2 className="cyber-heading text-2xl md:text-4xl font-orbitron font-bold mb-4 cyber-title">
+            <h2 className="cyber-heading text-2xl md:text-4xl font-orbitron font-bold mb-4 cyber-title reveal" data-stagger="1">
               ОБОРУДОВАНИЕ И УСТРОЙСТВА
             </h2>
-            <p className="text-muted-color max-w-2xl ml-1">
-              Конфигурации техники и периферии по зонам
-            </p>
+            <p className="text-muted-color max-w-2xl ml-1 reveal" data-stagger="2">Конфигурации техники и периферии по зонам</p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
             {specsTiers.map((spec, index) => {
               const device = devicesTiers.find((d) => d.tier === spec.tier)
               const color = colorOf(spec.tier)
-
               return (
                 <div
                   key={spec.tier}
-                  className={`bg-darker-bg/80 backdrop-blur-sm border border-neon-${color} rounded-lg overflow-hidden motion-safe:fade-in motion-safe:digital-distortion`}
-                  style={{ animationDelay: `${index * 0.1}s` }}
+                  className={`bg-darker-bg/80 backdrop-blur-sm border border-neon-${color} rounded-lg overflow-hidden digital-distortion reveal tilt-3d`}
+                  data-stagger={(index % 5) + 1}
                 >
                   <div className="p-4 md:p-6 h-full flex flex-col">
                     <div className="flex justify-between items-start mb-4">
                       <h3 className={`text-lg md:text-xl font-orbitron font-bold neon-${color}`}>{spec.tier}</h3>
-                      <span className="text-xs bg-darker-bg px-2 py-1 border border-border-color cyber-frame">
-                        {spec.count} ПК
-                      </span>
+                      <span className="text-xs bg-darker-bg px-2 py-1 border border-border-color cyber-frame">{spec.count} ПК</span>
                     </div>
 
                     <div className="space-y-4 mb-6 flex-grow">
-                      <div className={`cyber-divider-${color}`}></div>
+                      <div className={`cyber-divider-${color}`} />
 
                       <div className="space-y-2">
-                        <div className="flex items-center space-x-2">
-                          <span className="text-muted-color">CPU:</span>
-                          <span className="text-white">{spec.cpu}</span>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <span className="text-muted-color">GPU:</span>
-                          <span className="text-white">{spec.gpu}</span>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <span className="text-muted-color">RAM:</span>
-                          <span className="text-white">{spec.ram}</span>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <span className="text-muted-color">Монитор:</span>
-                          <span className="text-white">{spec.monitor}</span>
-                        </div>
+                        <div className="flex items-center space-x-2"><span className="text-muted-color">CPU:</span><span className="text-white">{spec.cpu}</span></div>
+                        <div className="flex items-center space-x-2"><span className="text-muted-color">GPU:</span><span className="text-white">{spec.gpu}</span></div>
+                        <div className="flex items-center space-x-2"><span className="text-muted-color">RAM:</span><span className="text-white">{spec.ram}</span></div>
+                        <div className="flex items-center space-x-2"><span className="text-muted-color">Монитор:</span><span className="text-white">{spec.monitor}</span></div>
 
                         {device && (
                           <>
-                            <div className="flex items-center space-x-2">
-                              <Mouse className="h-4 w-4 text-muted-color opacity-80" />
-                              <span className="text-white">{device.devices[0].name}</span>
-                            </div>
-                            <div className="flex items-center space-x-2">
-                              <Keyboard className="h-4 w-4 text-muted-color opacity-80" />
-                              <span className="text-white">{device.devices[1].name}</span>
-                            </div>
-                            <div className="flex items-center space-x-2">
-                              <Headphones className="h-4 w-4 text-muted-color opacity-80" />
-                              <span className="text-white">{device.devices[2].name}</span>
-                            </div>
+                            <div className="flex items-center space-x-2"><Mouse className="h-4 w-4 text-muted-color opacity-80" /><span className="text-white">{device.devices[0].name}</span></div>
+                            <div className="flex items-center space-x-2"><Keyboard className="h-4 w-4 text-muted-color opacity-80" /><span className="text-white">{device.devices[1].name}</span></div>
+                            <div className="flex items-center space-x-2"><Headphones className="h-4 w-4 text-muted-color opacity-80" /><span className="text-white">{device.devices[2].name}</span></div>
                           </>
                         )}
                       </div>
                     </div>
 
                     <a href="https://api.whatsapp.com/send/?phone=77080161720&text=Здравствуйте!%20Пишу%20по%20поводу%20выбора%20зоны&type=phone_number&app_absent=0">
-                      <button
-                        className={`cyber-button cyber-button-${color} w-full`}
-                        // @ts-ignore inline var для свечения
-                        style={{ "--neon-color": `var(--neon-${color})` } as any}
-                      >
-                        ВЫБРАТЬ
-                      </button>
+                      <button className={`cyber-button cyber-button-${color} w-full ripple`}>ВЫБРАТЬ</button>
                     </a>
                   </div>
                 </div>
@@ -505,20 +476,17 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ====== РАЗДЕЛИТЕЛЬ И F16 EXTRA ====== */}
+      {/* F16 EXTRA */}
       <section id="extra" className="py-8">
         <div className="container mx-auto px-4">
-          {/* Разделительная полоса с центровым текстом */}
-          <div className="relative my-6 md:my-10">
-            <div className="h-px w-full bg-gradient-to-r from-transparent via-neon-purple to-transparent opacity-60"></div>
+          <div className="relative my-6 md:my-10 reveal" data-stagger="1">
+            <div className="h-px w-full bg-gradient-to-r from-transparent via-neon-purple to-transparent opacity-60" />
             <div className="absolute inset-0 flex items-center justify-center">
-              <span className="px-4 py-1 bg-black/70 border border-neon-purple rounded font-orbitron text-lg md:text-2xl neon-purple">
-                F16 EXTRA
-              </span>
+              <span className="px-4 py-1 bg-black/70 border border-neon-purple rounded font-orbitron text-lg md:text-2xl neon-purple">F16 EXTRA</span>
             </div>
           </div>
 
-          <p className="text-muted-color text-center max-w-2xl mx-auto mb-10">
+          <p className="text-muted-color text-center max-w-2xl mx-auto mb-10 reveal" data-stagger="2">
             Отдельные зоны развлечений: симрейсинг, VR и PlayStation&nbsp;5.
           </p>
 
@@ -526,8 +494,8 @@ export default function Home() {
             {extraZones.map((z, i) => (
               <div
                 key={z.name}
-                className={`bg-darker-bg/80 backdrop-blur-sm border border-neon-${z.color} rounded-lg overflow-hidden cyber-card-3d hologram fade-in`}
-                style={{ animationDelay: `${0.1 * i}s` }}
+                className={`bg-darker-bg/80 backdrop-blur-sm border border-neon-${z.color} rounded-lg overflow-hidden cyber-card-3d hologram reveal tilt-3d`}
+                data-stagger={(i % 5) + 1}
               >
                 <div className="p-6 h-full flex flex-col">
                   <div className="flex items-center mb-4">
@@ -538,14 +506,14 @@ export default function Home() {
                   <ul className="space-y-2 mb-6 flex-grow">
                     {z.bullets.map((b, idx) => (
                       <li key={idx} className="flex items-start text-sm">
-                        <span className={`mt-1 h-1.5 w-1.5 rounded-full bg-neon-${z.color} mr-2`}></span>
+                        <span className={`mt-1 h-1.5 w-1.5 rounded-full bg-neon-${z.color} mr-2`} />
                         {b}
                       </li>
                     ))}
                   </ul>
 
                   <a href="https://api.whatsapp.com/send/?phone=77080161720&text=Здравствуйте!%20Бронь%20зоны%20F16%20Extra&type=phone_number&app_absent=0">
-                    <button className={`cyber-button cyber-button-${z.color} w-full`}>{z.cta}</button>
+                    <button className={`cyber-button cyber-button-${z.color} w-full ripple`}>{z.cta}</button>
                   </a>
                 </div>
               </div>
@@ -557,60 +525,29 @@ export default function Home() {
       {/* Level Up Discounts */}
       <section id="progress" className="py-20 bg-black/30 backdrop-blur-sm cyber-grid">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 font-orbitron glitch" data-text="Level Up Discounts">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 font-orbitron glitch reveal" data-text="Level Up Discounts" data-stagger="1">
             Level Up Discounts
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="bg-black/50 backdrop-blur-sm rounded-lg p-6 neon-border-blue transition-transform hover:-translate-y-1 duration-300 fade-in" style={{ animationDelay: "0.1s" }}>
-              <div className="flex justify-center mb-4">
-                <svg width="60" height="60" viewBox="0 0 24 24" fill="none" className="text-neon-blue">
-                  <path d="M12 2L2 7V12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12V7L12 2Z" stroke="currentColor" strokeWidth="2" />
-                  <path d="M9 12H15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                  <path d="M12 9V15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                </svg>
+            {[
+              { tier: "Silver", need: "Потрать более 100 000 ₸", off: "-10%", color: "blue", delay: 0.1 },
+              { tier: "Gold", need: "Потрать более 120 000 ₸", off: "-20%", color: "yellow", delay: 0.3 },
+              { tier: "Platinum", need: "Потрать более 250 000 ₸", off: "-30%", color: "purple", delay: 0.5 },
+              { tier: "Almaz", need: "Потрать более 500 000 ₸", off: "-40%", color: "red", delay: 0.7 },
+            ].map((c, i) => (
+              <div key={i} className={`bg-black/50 backdrop-blur-sm rounded-lg p-6 neon-border-${c.color} reveal tilt-3d`} data-stagger={(i % 5) + 1}>
+                <div className="flex justify-center mb-4">
+                  <svg width="60" height="60" viewBox="0 0 24 24" fill="none" className={`text-neon-${c.color}`}>
+                    <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="2" />
+                    <path d="M12 7v10M7 12h10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                  </svg>
+                </div>
+                <h3 className={`text-xl font-bold mb-4 font-orbitron neon-${c.color}`}>{c.tier}</h3>
+                <p className="text-gray-300 mb-2">{c.need}</p>
+                <p className={`text-2xl font-bold neon-${c.color}`}>{c.off}</p>
               </div>
-              <h3 className="text-xl font-bold mb-4 font-orbitron neon-blue">Silver</h3>
-              <p className="text-gray-300 mb-2">Потрать более 100 000 ₸</p>
-              <p className="text-2xl font-bold neon-blue">-10%</p>
-            </div>
-
-            <div className="bg-black/50 backdrop-blur-sm rounded-lg p-6 neon-border-yellow transition-transform hover:-translate-y-1 duration-300 fade-in" style={{ animationDelay: "0.3s" }}>
-              <div className="flex justify-center mb-4">
-                <svg width="60" height="60" viewBox="0 0 24 24" fill="none" className="text-neon-yellow">
-                  <circle cx="12" cy="8" r="6" stroke="currentColor" strokeWidth="2" />
-                  <path d="M8 16L12 22L16 16" stroke="currentColor" strokeWidth="2" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold mb-4 font-orbitron neon-yellow">Gold</h3>
-              <p className="text-gray-300 mb-2">Потрать более 120 000 ₸</p>
-              <p className="text-2xl font-bold neon-yellow">-20%</p>
-            </div>
-
-            <div className="bg-black/50 backdrop-blur-sm rounded-lg p-6 neon-border-purple transition-transform hover:-translate-y-1 duration-300 fade-in" style={{ animationDelay: "0.5s" }}>
-              <div className="flex justify-center mb-4">
-                <svg width="60" height="60" viewBox="0 0 24 24" fill="none" className="text-neon-purple">
-                  <path d="M3 12L12 2L21 12L12 22L3 12Z" stroke="currentColor" strokeWidth="2" />
-                  <path d="M12 2V22" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold mb-4 font-orbitron neon-purple">Platinum</h3>
-              <p className="text-gray-300 mb-2">Потрать более 250 000 ₸</p>
-              <p className="text-2xl font-bold neon-purple">-30%</p>
-            </div>
-
-            <div className="bg-black/50 backdrop-blur-sm rounded-lg p-6 neon-border-red transition-transform hover:-translate-y-1 duration-300 fade-in" style={{ animationDelay: "0.7s" }}>
-              <div className="flex justify-center mb-4">
-                <svg width="60" height="60" viewBox="0 0 24 24" fill="none" className="text-neon-red">
-                  <path d="M12 2L2 9L12 22L22 9L12 2Z" stroke="currentColor" strokeWidth="2" />
-                  <path d="M2 9H22" stroke="currentColor" strokeWidth="2" />
-                  <path d="M9 9L12 22L15 9" stroke="currentColor" strokeWidth="2" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold mb-4 font-orbitron neon-red">Almaz</h3>
-              <p className="text-gray-300 mb-2">Потрать более 500 000 ₸</p>
-              <p className="text-2xl font-bold neon-red">-40%</p>
-            </div>
+            ))}
           </div>
         </div>
       </section>
@@ -619,15 +556,17 @@ export default function Home() {
       <section id="contact" className="py-12 md:py-20 bg-darker-bg cyber-grid">
         <div className="container mx-auto px-4">
           <div className="mb-8 md:mb-12">
-            <h2 className="cyber-heading cyber-heading-blue text-2xl md:text-4xl font-orbitron font-bold mb-3 md:mb-4 cyber-title">
+            <h2 className="cyber-heading cyber-heading-blue text-2xl md:text-4xl font-orbitron font-bold mb-3 md:mb-4 cyber-title reveal" data-stagger="1">
               СВЯЗАТЬСЯ С НАМИ
             </h2>
-            <p className="text-muted-color max-w-2xl ml-4 text-sm md:text-base">Мы всегда на связи и готовы ответить на все вопросы</p>
+            <p className="text-muted-color max-w-2xl ml-4 text-sm md:text-base reveal" data-stagger="2">
+              Мы всегда на связи и готовы ответить на все вопросы
+            </p>
           </div>
 
           <div className="max-w-4xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-8 md:mb-10">
-              <div className="bg-darker-bg/50 backdrop-blur-sm p-4 md:p-6 rounded-lg border border-neon-blue/30">
+              <div className="bg-darker-bg/50 backdrop-blur-sm p-4 md:p-6 rounded-lg border border-neon-blue/30 reveal tilt-3d" data-stagger="1">
                 <h3 className="text-lg md:text-xl font-orbitron font-bold mb-4 md:mb-6 neon-blue cyber-text">КОНТАКТНАЯ ИНФОРМАЦИЯ</h3>
                 <ul className="space-y-4 md:space-y-6">
                   <li className="flex items-center">
@@ -657,7 +596,8 @@ export default function Home() {
                   </li>
                 </ul>
               </div>
-              <div className="bg-darker-bg/50 backdrop-blur-sm p-4 md:p-6 rounded-lg border border-neon-red/30">
+
+              <div className="bg-darker-bg/50 backdrop-blur-sm p-4 md:p-6 rounded-lg border border-neon-red/30 reveal tilt-3d" data-stagger="2">
                 <h3 className="text-lg md:text-xl font-orbitron font-bold mb-4 md:mb-6 neon-red cyber-text">СОЦИАЛЬНЫЕ СЕТИ</h3>
                 <ul className="space-y-4 md:space-y-6">
                   <li>
@@ -684,9 +624,10 @@ export default function Home() {
                 </ul>
               </div>
             </div>
-            <div className="text-center">
-              <div className="cyber-divider-blue mb-4 md:mb-6"></div>
-              <p className="text-base md:text-lg neon-blue font-orbitron font-bold cyber-glitch-text">
+
+            <div className="text-center reveal" data-stagger="3">
+              <div className="cyber-divider-blue mb-4 md:mb-6" />
+              <p className="text-base md:text-lg neon-blue font-orbitron font-bold glitch" data-text="F16 ARENA: 66 ПК И ЗОНЫ F16 EXTRA ЖДУТ ВАС!">
                 F16 ARENA: 66 ПК И ЗОНЫ F16 EXTRA ЖДУТ ВАС!
               </p>
             </div>
@@ -697,7 +638,7 @@ export default function Home() {
       {/* Карта */}
       <section id="map" className="py-10">
         <div className="container mx-auto px-4">
-          <div className="rounded overflow-hidden cyber-card-3d no-hover cyber-frame">
+          <div className="rounded overflow-hidden cyber-card-3d no-hover cyber-frame reveal" data-stagger="1">
             <iframe
               src="https://yandex.ru/map-widget/v1/?z=12&ol=biz&oid=138491615047"
               width="100%"
@@ -706,7 +647,7 @@ export default function Home() {
               title="F16 Arena Местоположение"
               className="w-full"
               loading="lazy"
-            ></iframe>
+            />
           </div>
         </div>
       </section>
@@ -716,26 +657,16 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="mb-4 md:mb-0 flex items-center">
-              <div className="mr-4 font-orbitron font-bold text-xl neon-red cyber-glitch-text">F16 ARENA</div>
+              <div className="mr-4 font-orbitron font-bold text-xl neon-red glitch" data-text="F16 ARENA">F16 ARENA</div>
               <div>
-                <a href="mailto:f16arena@gmail.com" className="hover:text-neon-blue transition-colors mr-4">
-                  f16arena@gmail.com
-                </a>
-                <a href="tel:+77080161720" className="hover:text-neon-blue transition-colors">
-                  +7708 016 17 20
-                </a>
+                <a href="mailto:f16arena@gmail.com" className="hover:text-neon-blue transition-colors mr-4">f16arena@gmail.com</a>
+                <a href="tel:+77080161720" className="hover:text-neon-blue transition-colors">+7708 016 17 20</a>
               </div>
             </div>
             <div className="flex space-x-4">
-              <a href="https://www.instagram.com/f16arena_/" target="_blank" rel="noopener noreferrer" className="cyber-icon">
-                <Instagram className="h-5 w-5" />
-              </a>
-              <a href="https://www.youtube.com/@F16arena" target="_blank" rel="noopener noreferrer" className="cyber-icon">
-                <Youtube className="h-5 w-5" />
-              </a>
-              <a href="https://t.me/f16arena" target="_blank" rel="noopener noreferrer" className="cyber-icon">
-                <MessageCircle className="h-5 w-5" />
-              </a>
+              <a href="https://www.instagram.com/f16arena_/" target="_blank" rel="noopener noreferrer" className="cyber-icon"><Instagram className="h-5 w-5" /></a>
+              <a href="https://www.youtube.com/@F16arena" target="_blank" rel="noopener noreferrer" className="cyber-icon"><Youtube className="h-5 w-5" /></a>
+              <a href="https://t.me/f16arena" target="_blank" rel="noopener noreferrer" className="cyber-icon"><MessageCircle className="h-5 w-5" /></a>
             </div>
           </div>
           <div className="text-center mt-8 text-sm text-muted-color">
@@ -744,7 +675,7 @@ export default function Home() {
         </div>
       </footer>
 
-      {/* Модалка (оставлена под будущие клики из Hero/Extra) */}
+      {/* Модалка */}
       {selectedImage && (
         <div
           className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-4 backdrop-blur-md"
