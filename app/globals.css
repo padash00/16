@@ -2,9 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ==============================
-   0) БАЗОВЫЕ ПЕРЕМЕННЫЕ/ШРИФТ
-   ============================== */
+/* =========================================================
+   0) ПЕРЕМЕННЫЕ И ШРИФТЫ
+   ========================================================= */
 :root {
   /* Неон-палитра */
   --neon-red:    #ff2a6d;  --neon-red-glow:    rgba(255, 42, 109, 0.7);
@@ -14,26 +14,22 @@
   --neon-green:  #01ffc3;  --neon-green-glow:  rgba(1, 255, 195, 0.7);
 
   /* Фон/текст */
-  --dark-bg:   #0b0c10;
-  --darker-bg: #070709;
-  --border-color: #1f2833;
-  --text-color: #e8e9f3;
-  --muted-color: #9a9ba8;
+  --dark-bg:        #0b0c10;
+  --darker-bg:      #070709;
+  --border-color:   #1f2833;
+  --text-color:     #e8e9f3;
+  --muted-color:    #9a9ba8;
 
   /* Градиенты */
-  --gradient-dark: linear-gradient(135deg, var(--darker-bg) 0%, var(--dark-bg) 100%);
-  --gradient-accent: linear-gradient(135deg, var(--neon-blue) 0%, var(--neon-purple) 100%);
-  --gradient-cyber: linear-gradient(
-    90deg,
-    var(--neon-blue) 0%,
-    var(--neon-purple) 25%,
-    var(--neon-red) 50%,
-    var(--neon-yellow) 75%,
-    var(--neon-green) 100%
-  );
+  --gradient-dark:   linear-gradient(135deg, var(--darker-bg) 0%, var(--dark-bg) 100%);
+  --gradient-cyber:  linear-gradient(90deg, var(--neon-blue), var(--neon-purple), var(--neon-red), var(--neon-yellow), var(--neon-green));
+
+  /* Текущая тема-компонента (универсальные токены) */
+  --c: var(--neon-red);
+  --c-glow: var(--neon-red-glow);
 }
 
-/* Универсальная «тема» цвета. Навесь один из .theme-xxx — дальше все компоненты возьмут --c / --c-glow */
+/* Темы (можно вешать на блоки) — подставляют --c/--c-glow */
 .theme-red    { --c: var(--neon-red);    --c-glow: var(--neon-red-glow); }
 .theme-blue   { --c: var(--neon-blue);   --c-glow: var(--neon-blue-glow); }
 .theme-purple { --c: var(--neon-purple); --c-glow: var(--neon-purple-glow); }
@@ -48,107 +44,151 @@
   font-display: swap;
 }
 
-/* ==============================
-   1) БАЗОВАЯ ТИПОГРАФИКА/ФОН
-   ============================== */
-body {
-  font-family: var(--font-roboto), sans-serif;
-  background-color: var(--dark-bg);
-  color: var(--text-color);
-  line-height: 1.5;
-  overflow-x: hidden;
-  position: relative;
-}
-
-body::before {
-  content: "";
-  position: fixed; inset: 0;
-  background:
-    linear-gradient(to bottom, rgba(11,12,16,.95) 0%, rgba(11,12,16,.9) 100%),
-    url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18a7 7 0 1 0 0-14 7 7 0 0 0 0 14zm48 25a7 7 0 1 0 0-14 7 7 0 0 0 0 14zM9 36a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm63 31a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM34 90a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm54-76a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM12 86a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm28-65a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm23-11a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm-6 60a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM60 91a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM35 41a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM12 60a2 2 0 1 0 0-4 2 2 0 0 0 0 4z' fill='%231f2833' fill-opacity='.15'/%3E%3C/svg%3E");
-  z-index: -1;
-}
-
-/* Сглаженная прокрутка + уважение к а11y */
+/* =========================================================
+   1) БАЗА
+   ========================================================= */
 html { scroll-behavior: smooth; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   * { animation: none !important; transition: none !important; }
 }
 
-.font-cyber { font-family: "Cyberpunk", var(--font-orbitron), sans-serif; }
-.font-orbitron { font-family: var(--font-orbitron), sans-serif; }
+body {
+  font-family: var(--font-roboto), sans-serif;
+  background: var(--gradient-dark) fixed;
+  color: var(--text-color);
+  line-height: 1.5;
+  overflow-x: hidden;
+  position: relative;
+}
+body::before {
+  content: "";
+  position: fixed; inset: 0; z-index: -1;
+  background:
+    linear-gradient(to bottom, rgba(11,12,16,.95) 0%, rgba(11,12,16,.9) 100%),
+    url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18a7 7 0 1 0 0-14 7 7 0 0 0 0 14zm48 25a7 7 0 1 0 0-14 7 7 0 0 0 0 14zM9 36a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm63 31a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM34 90a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm54-76a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM12 86a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm28-65a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm23-11a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm-6 60a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM60 91a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM35 41a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM12 60a2 2 0 1 0 0-4 2 2 0 0 0 0 4z' fill='%231f2833' fill-opacity='.15'/%3E%3C/svg%3E");
+}
 
-/* ==============================
-   2) ОБЩИЕ АНИМАЦИИ
-   ============================== */
-@keyframes kf-bgPulse {
-  0%,100% { background-position: 0% 50%; }
-  50%     { background-position: 100% 50%; }
+/* Tailwind base override — цвета */
+@layer base {
+  * { @apply border-border; }
+  body { @apply bg-background text-foreground; }
 }
-@keyframes kf-fadeIn {
-  from { opacity: 0; transform: translateY(20px); filter: blur(5px); }
-  to   { opacity: 1; transform: translateY(0);   filter: blur(0); }
-}
-@keyframes kf-scanline {
-  0% { top:-5%; opacity:.3; } 50%{opacity:.8;} 100%{ top:105%; opacity:.3;}
-}
-@keyframes kf-gridPulse {
-  0% { opacity:.3; background-size:100% 100%; }
-  100%{ opacity:.7; background-size:120% 120%; }
-}
-@keyframes kf-meshShift {
-  0% { background-position: 0 0; }
-  100%{ background-position: 50px 50px; }
-}
-@keyframes kf-pulse { 0%,100%{opacity:.7} 50%{opacity:1} }
-@keyframes kf-noise { 0%,100%{opacity:.03} 50%{opacity:.05} }
-@keyframes kf-dataFlow { from{ transform: translateY(0);} to{ transform: translateY(33.33%);} }
 
-/* ==============================
-   3) НЕОНОВЫЕ УТИЛИТЫ (ЕДИНЫЕ)
-   ============================== */
-/* Текст с неоном для ТЕКУЩЕГО --c/--c-glow */
+/* Алиасы под utility-классы, используемые в JSX */
+.text-muted-color   { color: var(--muted-color); }
+.bg-darker-bg       { background-color: var(--darker-bg); }
+.bg-dark-bg         { background-color: var(--dark-bg); }
+.border-border-color{ border-color: var(--border-color); }
+
+/* Семейства шрифтов */
+.font-cyber     { font-family: "Cyberpunk", var(--font-orbitron), sans-serif; }
+.font-orbitron  { font-family: var(--font-orbitron), sans-serif; }
+
+/* Скроллбар */
+::-webkit-scrollbar{ width:8px; height:8px; }
+::-webkit-scrollbar-track{ background: var(--darker-bg); border-left:1px solid var(--border-color); }
+::-webkit-scrollbar-thumb{
+  background: linear-gradient(to bottom, var(--neon-blue), var(--neon-purple));
+}
+::-webkit-scrollbar-thumb:hover{
+  background: linear-gradient(to bottom, var(--neon-red), var(--neon-purple));
+}
+
+/* =========================================================
+   2) KEYFRAMES
+   ========================================================= */
+@keyframes kf-bgPulse { 0%,100%{background-position:0% 50%} 50%{background-position:100% 50%} }
+@keyframes kf-fadeIn  { from{opacity:0;transform:translateY(20px);filter:blur(5px)} to{opacity:1;transform:translateY(0);filter:blur(0)} }
+@keyframes kf-scanline{ 0%{top:-5%;opacity:.3} 50%{opacity:.8} 100%{top:105%;opacity:.3} }
+@keyframes kf-gridPulse{ 0%{opacity:.3;background-size:100% 100%} 100%{opacity:.7;background-size:120% 120%} }
+@keyframes kf-meshShift{ 0%{background-position:0 0} 100%{background-position:50px 50px} }
+@keyframes kf-pulse   { 0%,100%{opacity:.7} 50%{opacity:1} }
+@keyframes kf-noise   { 0%,100%{opacity:.03} 50%{opacity:.05} }
+@keyframes kf-dataFlow{ from{transform:translateY(0)} to{transform:translateY(33.33%)} }
+@keyframes kf-revealUp{ from{opacity:0;transform:translateY(24px) scale(.98);filter:blur(6px)} to{opacity:1;transform:translateY(0) scale(1);filter:blur(0)} }
+@keyframes kf-glowLoop{ 0%,100%{box-shadow:0 0 8px var(--c-glow), inset 0 0 4px var(--c-glow)} 50%{box-shadow:0 0 16px var(--c-glow), inset 0 0 8px var(--c-glow)} }
+@keyframes kf-shimmer { 0%{background-position:-200% 50%} 100%{background-position:200% 50%} }
+@keyframes kf-borderRun{ to { background-position:200% 0 } }
+@keyframes kf-floatY  { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
+@keyframes kf-wiggle  { 0%,100%{transform:rotate(0)} 25%{transform:rotate(.6deg)} 75%{transform:rotate(-.6deg)} }
+@keyframes kf-ripple  { from{width:10px;height:10px;opacity:.35} to{width:500px;height:500px;opacity:0} }
+@keyframes glitch-core{
+  0%,14%{ text-shadow:.05em 0 rgba(255,0,0,.4), -.025em -.05em rgba(0,255,0,.4), .025em .05em rgba(0,0,255,.4) }
+  15%,49%{ text-shadow:-.05em -.025em rgba(255,0,0,.4), .025em .025em rgba(0,255,0,.4), -.05em -.05em rgba(0,0,255,.4) }
+  50%,99%{ text-shadow:.025em .05em rgba(255,0,0,.4), .05em 0 rgba(0,255,0,.4), 0 -.05em rgba(0,0,255,.4) }
+  100%   { text-shadow:-.025em 0 rgba(255,0,0,.4), -.025em -.025em rgba(0,255,0,.4), -.025em -.05em rgba(0,0,255,.4) }
+}
+@keyframes glitch-slice-1{ 0%{clip: rect(2px,9999px,56px,0)} 100%{clip: rect(20px,9999px,9px,0)} }
+@keyframes glitch-slice-2{ 0%{clip: rect(39px,9999px,91px,0)} 100%{clip: rect(41px,9999px,73px,0)} }
+@keyframes title-line { 0%{width:20px;opacity:.6} 100%{width:30px;opacity:.9} }
+@keyframes term-border{ 0%{ border-left-color: var(--neon-green); box-shadow:0 0 5px var(--neon-green-glow)} 100%{ border-left-color: var(--neon-blue); box-shadow:0 0 10px var(--neon-blue-glow)} }
+@keyframes shadow-pulse{ 0%{opacity:.4; filter:blur(8px); transform:scale(.95)} 100%{opacity:.7; filter:blur(12px); transform:scale(1.05)} }
+@keyframes holo-scan   { 0%{transform:translateY(0) scale(1)} 50%{transform:translateY(50%) scale(1.05)} 100%{transform:translateY(100%) scale(1)} }
+
+/* =========================================================
+   3) НЕОНОВЫЕ УТИЛИТЫ И ЦВЕТА (совместимость с JSX)
+   ========================================================= */
+/* Текст/фон/бордер под цвета */
+.text-neon-red    { color: var(--neon-red) }
+.text-neon-blue   { color: var(--neon-blue) }
+.text-neon-purple { color: var(--neon-purple) }
+.text-neon-yellow { color: var(--neon-yellow) }
+.text-neon-green  { color: var(--neon-green) }
+
+.bg-neon-red    { background-color: var(--neon-red) }
+.bg-neon-blue   { background-color: var(--neon-blue) }
+.bg-neon-purple { background-color: var(--neon-purple) }
+.bg-neon-yellow { background-color: var(--neon-yellow) }
+.bg-neon-green  { background-color: var(--neon-green) }
+
+.border-neon-red    { border-color: var(--neon-red) }
+.border-neon-blue   { border-color: var(--neon-blue) }
+.border-neon-purple { border-color: var(--neon-purple) }
+.border-neon-yellow { border-color: var(--neon-yellow) }
+.border-neon-green  { border-color: var(--neon-green) }
+
+/* Универсальный неон-текст от текущей --c */
 .neon {
   color: var(--c);
   text-shadow: 0 0 5px var(--c-glow), 0 0 15px var(--c-glow), 0 0 30px var(--c-glow);
   animation: kf-pulse 2.8s infinite alternate;
 }
-.neon.fast   { animation-duration: 2s; }
-.neon.slow   { animation-duration: 4s; }
+.neon.fast { animation-duration: 2s; }
+.neon.slow { animation-duration: 4s; }
 
-/* Для обратной совместимости: классы вида .neon-red и т.п. просто применяют тему + .neon */
-.neon-red    { @apply neon; }    .neon-blue   { @apply neon; }
-.neon-purple { @apply neon; }    .neon-yellow { @apply neon; }
-.neon-green  { @apply neon; }
+/* Для обратной совместимости классов вида .neon-red */
+.neon-red, .neon-blue, .neon-purple, .neon-yellow, .neon-green { @apply neon; }
 .neon-red    { --c: var(--neon-red);    --c-glow: var(--neon-red-glow); }
 .neon-blue   { --c: var(--neon-blue);   --c-glow: var(--neon-blue-glow); }
 .neon-purple { --c: var(--neon-purple); --c-glow: var(--neon-purple-glow); }
 .neon-yellow { --c: var(--neon-yellow); --c-glow: var(--neon-yellow-glow); }
 .neon-green  { --c: var(--neon-green);  --c-glow: var(--neon-green-glow); }
 
-/* Неоновая рамка (универсальная) */
-.neon-border {
-  border: 1px solid var(--c);
-  box-shadow: 0 0 5px var(--c-glow), inset 0 0 5px var(--c-glow);
-  animation: kf-pulse 2.8s infinite alternate;
-}
-
-/* Разделитель (универсальный) */
-.cyber-divider {
+/* =========================================================
+   4) РАЗДЕЛИТЕЛИ / ХЕДИНГИ / ТЕКСТ С ГРАДИЕНТОМ
+   ========================================================= */
+/* Базовый разделитель + цветовые одноразовые классы */
+.cyber-divider{
   height: 2px; opacity: .6; position: relative; overflow: hidden;
   background: linear-gradient(90deg, transparent, var(--c), transparent);
 }
 .cyber-divider::after{
   content:""; position:absolute; inset:0 auto 0 -100%; width:50%;
   background: linear-gradient(90deg, transparent, var(--c), transparent);
-  animation: divider-flow 3s infinite;
-  box-shadow: 0 0 10px var(--c-glow);
+  animation: divider-flow 3s infinite; box-shadow: 0 0 10px var(--c-glow);
 }
 @keyframes divider-flow { from{left:-50%} to{left:150%} }
 
-/* Заголовок с лентой слева (универсальный) */
-.cyber-heading {
+/* Цветовые одноимённые дивидеры (используются как .cyber-divider-red) */
+.cyber-divider-red    { --c: var(--neon-red);    --c-glow: var(--neon-red-glow);    @apply cyber-divider; }
+.cyber-divider-blue   { --c: var(--neon-blue);   --c-glow: var(--neon-blue-glow);   @apply cyber-divider; }
+.cyber-divider-purple { --c: var(--neon-purple); --c-glow: var(--neon-purple-glow); @apply cyber-divider; }
+.cyber-divider-yellow { --c: var(--neon-yellow); --c-glow: var(--neon-yellow-glow); @apply cyber-divider; }
+.cyber-divider-green  { --c: var(--neon-green);  --c-glow: var(--neon-green-glow);  @apply cyber-divider; }
+
+/* Заголовок-лента */
+.cyber-heading{
   position: relative; display: inline-block;
   font-family: var(--font-orbitron), sans-serif;
   font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
@@ -157,14 +197,34 @@ html { scroll-behavior: smooth; }
 .cyber-heading::before{
   content:""; position:absolute; top:0; left:0; width:4px; height:100%;
   background-color: var(--c); box-shadow: 0 0 10px var(--c-glow);
-  animation: heading-pulse 2.8s infinite alternate;
+  animation: kf-pulse 2.8s infinite alternate;
 }
-@keyframes heading-pulse {
-  0% { box-shadow: 0 0 5px var(--c-glow); height:100%; }
-  100%{ box-shadow: 0 0 15px var(--c-glow); height:110%; }
+/* Часто используемый пресет */
+.cyber-heading-blue   { --c: var(--neon-blue);   --c-glow: var(--neon-blue-glow);   @apply cyber-heading; }
+
+/* Титул с боковыми линиями */
+.cyber-title{
+  position:relative; display:inline-block; padding:0 .5em;
+  font-family: var(--font-orbitron), sans-serif; text-transform:uppercase; letter-spacing:.1em;
+}
+.cyber-title::before, .cyber-title::after{
+  content:""; position:absolute; top:50%; width:20px; height:2px;
+  background-color: var(--c); opacity:.8; box-shadow: 0 0 10px var(--c-glow);
+  animation: title-line 2.2s infinite alternate;
+}
+.cyber-title::before{ left:-30px } .cyber-title::after{ right:-30px }
+
+/* Градиент-текст */
+.cyber-text{
+  font-family: var(--font-orbitron), sans-serif; text-transform:uppercase; letter-spacing:.1em;
+  background: var(--gradient-cyber); background-size: 300% 300%;
+  animation: kf-bgPulse 10s ease infinite; -webkit-background-clip:text; background-clip:text;
+  -webkit-text-fill-color: transparent; text-fill-color: transparent; opacity:.9;
 }
 
-/* Кнопка (универсальная) */
+/* =========================================================
+   5) КНОПКИ
+   ========================================================= */
 .cyber-button,
 .cyber-button-3d{
   position: relative; display:inline-flex; align-items:center; justify-content:center;
@@ -207,20 +267,40 @@ html { scroll-behavior: smooth; }
   box-shadow: 0 10px 20px color-mix(in srgb, var(--c) 30%, transparent), 0 0 10px var(--c-glow), 0 0 20px var(--c-glow);
 }
 
-/* Карточка (2D/3D) — единая база + модификаторы */
+/* Цветовые кнопки (используются как .cyber-button-red и т.п.) */
+.cyber-button-red    { --c: var(--neon-red); }
+.cyber-button-blue   { --c: var(--neon-blue); }
+.cyber-button-purple { --c: var(--neon-purple); }
+.cyber-button-yellow { --c: var(--neon-yellow); }
+.cyber-button-green  { --c: var(--neon-green); }
+
+/* Ripple без JS */
+.cyber-button.ripple { overflow: hidden; position: relative; }
+.cyber-button.ripple:active::before{
+  content:""; position:absolute; left:50%; top:50%; width:10px; height:10px; border-radius:50%;
+  background: var(--c); transform: translate(-50%,-50%); opacity:.35; animation: kf-ripple .6s ease-out 1;
+}
+
+/* =========================================================
+   6) КАРТОЧКИ/РАМКИ/ИКОНКИ
+   ========================================================= */
 .cyber-card,
 .cyber-card-3d{
   position: relative; background-color: rgba(7,7,9,.8); backdrop-filter: blur(10px);
   border: 1px solid var(--border-color);
   clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 15px, 100% 100%, 15px 100%, 0 calc(100% - 15px));
-  overflow: hidden; transition: transform .3s ease, box-shadow .3s ease;
+  overflow: hidden; transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
 }
 .cyber-card::before{
   content:""; position:absolute; top:0; left:0; width:100%; height:1px;
   background: linear-gradient(90deg, transparent, var(--c, var(--neon-red)), transparent);
   opacity:.5;
 }
-.cyber-card:hover{ transform: translateY(-5px) scale(1.02); border-color: var(--c, var(--neon-red)); box-shadow: 0 10px 20px color-mix(in srgb, var(--c, var(--neon-red)) 20%, transparent); }
+.cyber-card:hover{
+  transform: translateY(-5px) scale(1.02);
+  border-color: var(--c, var(--neon-red));
+  box-shadow: 0 10px 20px color-mix(in srgb, var(--c, var(--neon-red)) 20%, transparent);
+}
 
 .cyber-card-3d{
   transition: all .4s cubic-bezier(.175,.885,.32,1.275);
@@ -241,9 +321,9 @@ html { scroll-behavior: smooth; }
   border-color: var(--c, var(--neon-red));
   box-shadow: 0 15px 30px color-mix(in srgb, var(--c, var(--neon-red)) 20%, transparent), 0 0 15px var(--c-glow, var(--neon-red-glow));
 }
-.cyber-card-3d:hover::after{ opacity:.1; transform: rotate(360deg); }
 .cyber-card-3d.no-hover:hover{ transform:none; box-shadow:none; border-color: var(--border-color); }
 .cyber-card-3d.no-hover:hover::after{ opacity:0; transform: rotate(0); }
+.cyber-card-3d:hover::after{ opacity:.1; transform: rotate(360deg); }
 
 /* Рамка-градиент */
 .cyber-frame { position: relative; padding:2px; background-clip: padding-box; }
@@ -252,51 +332,24 @@ html { scroll-behavior: smooth; }
   background: var(--gradient-cyber); background-size: 300% 300%;
   animation: kf-bgPulse 10s ease infinite, kf-pulse 3s infinite alternate;
   mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  mask-composite: exclude; -webkit-mask-composite: xor;
+  -webkit-mask-composite: xor; mask-composite: exclude;
   pointer-events:none; opacity:.8;
 }
 
-/* Титул */
-.cyber-title{
-  position:relative; display:inline-block; padding:0 .5em;
-  font-family: var(--font-orbitron), sans-serif; text-transform:uppercase; letter-spacing:.1em;
+/* Неоновая «дышащая» рамка */
+.neon-border-animated{
+  position: relative; border: 1px solid color-mix(in srgb, var(--c) 60%, transparent);
 }
-.cyber-title::before, .cyber-title::after{
-  content:""; position:absolute; top:50%; width:20px; height:2px;
-  background-color: var(--c, var(--neon-red)); opacity:.8;
-  box-shadow: 0 0 10px var(--c-glow, var(--neon-red-glow));
-  animation: title-line 2.2s infinite alternate;
-}
-.cyber-title::before{ left:-30px; } .cyber-title::after{ right:-30px; }
-@keyframes title-line { 0%{width:20px;opacity:.6} 100%{width:30px;opacity:.9} }
-
-/* Текст с градиентом */
-.cyber-text{
-  font-family: var(--font-orbitron), sans-serif; text-transform:uppercase; letter-spacing:.1em;
-  background: var(--gradient-cyber); background-size: 300% 300%;
-  animation: kf-bgPulse 10s ease infinite; -webkit-background-clip:text; background-clip:text;
-  -webkit-text-fill-color: transparent; text-fill-color: transparent; opacity:.9;
+.neon-border-animated::after{
+  content:""; position:absolute; inset:-1px; padding:1px;
+  background: linear-gradient(90deg, transparent, var(--c), transparent, var(--c), transparent);
+  background-size: 200% 100%; filter: blur(4px); opacity:.45; z-index:-1;
+  animation: kf-borderRun 3s linear infinite;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
 }
 
-/* Нав-линк */
-.cyber-nav-item{
-  position:relative; font-family: var(--font-orbitron), sans-serif; font-weight:500;
-  text-transform:uppercase; letter-spacing:1px; padding:.5rem 1rem;
-  transition: all .3s ease; clip-path: polygon(8% 0, 100% 0, 92% 100%, 0% 100%); overflow:hidden;
-}
-.cyber-nav-item::before{
-  content:""; position:absolute; inset:0; left:-100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,.1), transparent);
-  transition: all .5s ease;
-}
-.cyber-nav-item:hover::before{ left:100%; }
-.cyber-nav-item:hover{ color: var(--neon-red); text-shadow: 0 0 5px var(--neon-red-glow); }
-.cyber-nav-item.active{
-  background-color: rgba(255,42,109,.2); color: var(--neon-red);
-  text-shadow: 0 0 5px var(--neon-red-glow); box-shadow: 0 0 10px var(--neon-red-glow);
-}
-
-/* Иконка */
+/* Иконка-грань */
 .cyber-icon{
   display:inline-flex; align-items:center; justify-content:center; width:40px; height:40px;
   border:1px solid var(--border-color);
@@ -309,18 +362,25 @@ html { scroll-behavior: smooth; }
   background: conic-gradient(transparent, transparent, transparent, var(--c, var(--neon-red)));
   animation: icon-rot 6s linear infinite; opacity:0; transition: opacity .3s ease;
 }
-.cyber-icon:hover::before{ opacity:.2; }
 @keyframes icon-rot { to { transform: rotate(360deg); } }
+.cyber-icon:hover::before{ opacity:.2; }
 .cyber-icon:hover{
   border-color: var(--c, var(--neon-red)); box-shadow: 0 0 10px var(--c-glow, var(--neon-red-glow));
   transform: scale(1.2) rotate(45deg);
 }
 .cyber-icon:hover > *{ transform: rotate(-45deg); color: var(--c, var(--neon-red)); }
 
-/* Сканлайн/голограмма/шум/сетка */
+/* Лёгкий hover-пульс иконок */
+.icon-pulse > svg { transition: transform .25s ease, filter .25s ease; }
+.icon-pulse:hover > svg { transform: scale(1.12); filter: drop-shadow(0 0 6px var(--c-glow)); }
+
+/* =========================================================
+   7) ЭФФЕКТЫ ФОНА/СЕТКИ/СКАНЛАЙН/ШУМ
+   ========================================================= */
 .scanline{ position:relative; overflow:hidden; }
 .scanline::after{
-  content:""; position:absolute; left:0; width:100%; height:3px; background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
+  content:""; position:absolute; left:0; width:100%; height:3px;
+  background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
   opacity:.5; animation: kf-scanline 4s linear infinite; box-shadow: 0 0 15px var(--neon-blue-glow); filter: blur(1px);
 }
 
@@ -328,20 +388,12 @@ html { scroll-behavior: smooth; }
 .hologram::before{
   content:""; position:absolute; inset:0;
   background: linear-gradient(135deg, rgba(5,217,232,.1) 0%, rgba(212,66,245,.1) 100%);
-  animation: holo-color 8s infinite alternate;
-}
-@keyframes holo-color {
-  0%{ background: linear-gradient(135deg, rgba(5,217,232,.1) 0%, rgba(212,66,245,.1) 100%) }
-  50%{ background: linear-gradient(135deg, rgba(255,42,109,.1) 0%, rgba(1,255,195,.1) 100%) }
-  100%{ background: linear-gradient(135deg, rgba(249,248,113,.1) 0%, rgba(5,217,232,.1) 100%) }
+  animation: kf-bgPulse 8s infinite alternate;
 }
 .hologram::after{
   content:""; position:absolute; inset:0;
   background: repeating-linear-gradient(0deg, rgba(255,255,255,.05) 0 1px, transparent 1px 2px);
   animation: holo-scan 6s linear infinite; opacity:.5;
-}
-@keyframes holo-scan {
-  0%{ transform: translateY(0) scale(1) } 50%{ transform: translateY(50%) scale(1.05) } 100%{ transform: translateY(100%) scale(1) }
 }
 
 .digital-noise{ position:relative; }
@@ -351,6 +403,19 @@ html { scroll-behavior: smooth; }
   opacity:.05; pointer-events:none; animation: kf-noise .5s infinite; mix-blend-mode: overlay;
 }
 
+/* «Цифровые помехи» — лёгкий эффект */
+.digital-distortion{
+  position: relative;
+  isolation: isolate;
+}
+.digital-distortion::after{
+  content:""; position:absolute; inset:0; z-index:-1;
+  background: linear-gradient(180deg, transparent 0 10%, rgba(255,255,255,.015) 10% 11%, transparent 11% 100%);
+  background-size: 100% 12px;
+  mix-blend-mode: overlay; pointer-events:none;
+}
+
+/* Глобальные сетки */
 .cyber-grid{
   background-image:
     linear-gradient(rgba(5, 217, 232, .05) 1px, transparent 1px),
@@ -363,7 +428,6 @@ html { scroll-behavior: smooth; }
   pointer-events:none; animation: kf-gridPulse 8s infinite alternate;
 }
 
-/* Меш/Матрица/Грид-оверлей */
 .cyber-mesh{ position:relative; }
 .cyber-mesh::before{
   content:""; position:absolute; inset:0;
@@ -389,7 +453,7 @@ html { scroll-behavior: smooth; }
   background-size: 20px 20px; pointer-events:none; z-index:1; animation: kf-gridPulse 8s infinite alternate;
 }
 
-/* Декор: статус-бар/углы/тени */
+/* Декор */
 .cyber-status{ position:relative; height:4px; background-color: rgba(255,255,255,.05); overflow:hidden; border-radius:2px; }
 .cyber-status::before{
   content:""; position:absolute; top:0; left:0; height:100%; width:30%;
@@ -400,26 +464,25 @@ html { scroll-behavior: smooth; }
 
 .cyber-corner{ position:relative; }
 .cyber-corner::before, .cyber-corner::after{
-  content:""; position:absolute; width:25px; height:25px; opacity:.8;
+  content:""; position:absolute; width:25px; height:25px; opacity:.8; border-color: var(--c, var(--neon-red));
   transition: all .5s cubic-bezier(.175,.885,.32,1.275);
-  border-color: var(--c, var(--neon-red));
 }
 .cyber-corner::before{
-  top:0; left:0; border-top:2px solid; border-left:2px solid; box-shadow: 5px 0 5px -2px var(--c-glow), 0 5px 5px -2px var(--c-glow);
-  animation: corner-pulse 3s infinite alternate;
+  top:0; left:0; border-top:2px solid; border-left:2px solid;
+  box-shadow: 5px 0 5px -2px var(--c-glow), 0 5px 5px -2px var(--c-glow);
+  animation: kf-pulse 3s infinite alternate;
 }
 .cyber-corner::after{
-  bottom:0; right:0; border-bottom:2px solid; border-right:2px solid; box-shadow: -5px 0 5px -2px var(--c-glow), 0 -5px 5px -2px var(--c-glow);
-  animation: corner-pulse 3s infinite alternate-reverse;
+  bottom:0; right:0; border-bottom:2px solid; border-right:2px solid;
+  box-shadow: -5px 0 5px -2px var(--c-glow), 0 -5px 5px -2px var(--c-glow);
+  animation: kf-pulse 3s infinite alternate-reverse;
 }
-@keyframes corner-pulse { 0%{opacity:.5;width:25px;height:25px} 100%{opacity:.8;width:35px;height:35px} }
-.cyber-corner:hover::before, .cyber-corner:hover::after{ width:40px; height:40px; opacity:1; }
 
 /* Частицы/потоки */
 .cyber-particles{ position:absolute; inset:0; overflow:hidden; z-index:0; pointer-events:none; }
 .cyber-particle{
-  position:absolute; width:2px; height:2px; background-color: var(--neon-blue);
-  border-radius:50%; box-shadow: 0 0 10px var(--neon-blue-glow);
+  position:absolute; width:2px; height:2px; border-radius:50%;
+  box-shadow: 0 0 10px var(--neon-blue-glow);
   animation: particle 15s linear infinite;
 }
 @keyframes particle {
@@ -427,10 +490,8 @@ html { scroll-behavior: smooth; }
   10%,90%{ opacity:1 }
   100%{ transform: translateY(-100vh) translateX(100px); opacity:0 }
 }
-
 .data-stream{ position:relative; overflow:hidden; }
-.data-stream::before,
-.data-stream::after{
+.data-stream::before, .data-stream::after{
   content:""; position:absolute; top:-100%; width:2px; height:300%; opacity:.7; filter: blur(1px);
 }
 .data-stream::before{
@@ -442,79 +503,114 @@ html { scroll-behavior: smooth; }
   animation: kf-dataFlow 4s linear infinite; box-shadow: 0 0 15px var(--neon-red-glow);
 }
 
-/* Глитч (заголовки) — облегчённая версия */
+/* =========================================================
+   8) REVEAL/СТАДЖЕР/3D/ШАЙНИ
+   ========================================================= */
+.reveal   { opacity: 0; transform: translateY(24px); }
+.reveal.in{ animation: kf-revealUp .7s cubic-bezier(.22,.85,.33,1) forwards; }
+.reveal[data-stagger="1"].in { animation-delay: .05s }
+.reveal[data-stagger="2"].in { animation-delay: .10s }
+.reveal[data-stagger="3"].in { animation-delay: .15s }
+.reveal[data-stagger="4"].in { animation-delay: .20s }
+.reveal[data-stagger="5"].in { animation-delay: .25s }
+
+.tilt-3d{
+  transform-style: preserve-3d; perspective: 1000px;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.tilt-3d:hover    { transform: translateY(-6px) rotateX(4deg) rotateY(-3deg); }
+.tilt-3d:active   { transform: translateY(-2px) rotateX(1deg) rotateY(-1deg) scale(.99); }
+.tilt-glow        { animation: kf-glowLoop 3s ease-in-out infinite; }
+
+.shimmer{
+  background-image: linear-gradient(110deg, rgba(255,255,255,.04) 0%, rgba(255,255,255,.08) 20%, rgba(255,255,255,.02) 40%);
+  background-size: 300% 100%; animation: kf-shimmer 2.2s linear infinite;
+}
+
+.gradient-animate{
+  background-image:
+    radial-gradient(1000px 400px at 10% 10%, rgba(5,217,232,.08), transparent 60%),
+    radial-gradient(800px  300px at 90% 20%, rgba(212,66,245,.07), transparent 60%),
+    radial-gradient(1200px 500px at 50% 80%, rgba(255,42,109,.05), transparent 60%);
+  animation: kf-bgPulse 12s ease-in-out infinite;
+}
+
+.parallax-grid{
+  background-image:
+    linear-gradient(rgba(5, 217, 232, .05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(5, 217, 232, .05) 1px, transparent 1px);
+  background-size: 28px 28px; animation: kf-gridPulse 10s ease-in-out infinite;
+}
+
+.float-y { animation: kf-floatY 4s ease-in-out infinite; }
+.micro-wiggle:hover { animation: kf-wiggle .45s ease-in-out 1; }
+
+.card-live{
+  transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+}
+.card-live:hover{
+  transform: translateY(-8px);
+  border-color: var(--c, var(--neon-blue));
+  box-shadow: 0 8px 24px color-mix(in srgb, var(--c, var(--neon-blue)) 18%, transparent),
+              0 0 14px var(--c-glow, var(--neon-blue-glow));
+}
+
+/* =========================================================
+   9) ГЛИТЧ/ТЕРМИНАЛ/ШАДОУ/ПУЛЬС
+   ========================================================= */
 .glitch{
-  position:relative; color: var(--text-color); letter-spacing:.1em;
-  text-shadow: .05em 0 0 rgba(255,0,0,.4), -.025em -.05em 0 rgba(0,255,0,.4), .025em .05em 0 rgba(0,0,255,.4);
-  animation: glitch-core 2s infinite;
+  position:relative; color: var(--text-color); letter-spacing:.1em; animation: glitch-core 2s infinite;
 }
 .glitch::before, .glitch::after{
   content: attr(data-text); position:absolute; inset:0; clip: rect(0,0,0,0); opacity:.5;
 }
 .glitch::before{ left:-2px; text-shadow: 1px 0 var(--neon-blue);  animation: glitch-slice-1 3s infinite linear alternate-reverse; }
 .glitch::after { left: 2px; text-shadow:-1px 0 var(--neon-red);  animation: glitch-slice-2 4s infinite linear alternate-reverse; }
-@keyframes glitch-core {
-  0%,14%{ text-shadow:.05em 0 rgba(255,0,0,.4), -.025em -.05em rgba(0,255,0,.4), .025em .05em rgba(0,0,255,.4) }
-  15%,49%{ text-shadow:-.05em -.025em rgba(255,0,0,.4), .025em .025em rgba(0,255,0,.4), -.05em -.05em rgba(0,0,255,.4) }
-  50%,99%{ text-shadow:.025em .05em rgba(255,0,0,.4), .05em 0 rgba(0,255,0,.4), 0 -.05em rgba(0,0,255,.4) }
-  100%{ text-shadow:-.025em 0 rgba(255,0,0,.4), -.025em -.025em rgba(0,255,0,.4), -.025em -.05em rgba(0,0,255,.4) }
-}
-/* компактные «резки» */
-@keyframes glitch-slice-1 { 0%{clip: rect(2px,9999px,56px,0)} 100%{clip: rect(20px,9999px,9px,0)} }
-@keyframes glitch-slice-2 { 0%{clip: rect(39px,9999px,91px,0)} 100%{clip: rect(41px,9999px,73px,0)} }
 
-/* Терминальный текст */
 .terminal-text{
   font-family: monospace; color: var(--text-color); position:relative; display:inline-block;
   background-color: rgba(7,7,9,.7); padding:.25rem .5rem; border-left:3px solid var(--neon-green);
   box-shadow: 0 0 10px var(--neon-green-glow); animation: term-border 2s infinite alternate;
 }
-@keyframes term-border {
-  0%{ border-left-color: var(--neon-green); box-shadow: 0 0 5px var(--neon-green-glow) }
-  100%{ border-left-color: var(--neon-blue);  box-shadow: 0 0 10px var(--neon-blue-glow) }
-}
 .terminal-text::after{ content:"|"; animation: blink 1s step-end infinite; color: var(--neon-green); }
 @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
 
-/* Тени/пульс/скроллбар */
 .cyber-shadow{ position:relative; }
 .cyber-shadow::after{
   content:""; position:absolute; bottom:-15px; left:5%; width:90%; height:20px;
   background: radial-gradient(ellipse at center, rgba(5,217,232,.4) 0%, transparent 70%);
   filter: blur(8px); z-index:-1; animation: shadow-pulse 3s infinite alternate;
 }
-@keyframes shadow-pulse { 0%{opacity:.4; filter:blur(8px); transform:scale(.95)} 100%{opacity:.7; filter:blur(12px); transform:scale(1.05)} }
 
 .pulse-effect{ animation: kf-pulse 3s infinite; }
 .fade-in{ animation: kf-fadeIn .8s cubic-bezier(.175,.885,.32,1.275) forwards; }
 
-::-webkit-scrollbar{ width:8px; height:8px; }
-::-webkit-scrollbar-track{ background: var(--darker-bg); border-left:1px solid var(--border-color); }
-::-webkit-scrollbar-thumb{
-  background: linear-gradient(to bottom, var(--neon-blue), var(--neon-purple));
-  border-radius:0;
+/* =========================================================
+   10) НАВИГАЦИЯ
+   ========================================================= */
+.cyber-nav-item{
+  position:relative; font-family: var(--font-orbitron), sans-serif; font-weight:500;
+  text-transform:uppercase; letter-spacing:1px; padding:.5rem 1rem;
+  transition: all .3s ease; clip-path: polygon(8% 0, 100% 0, 92% 100%, 0% 100%); overflow:hidden;
 }
-::-webkit-scrollbar-thumb:hover{ background: linear-gradient(to bottom, var(--neon-red), var(--neon-purple)); }
-
-/* Полосы-«data stream» вертикальные */
-.data-stream{ /* уже выше описан хук и keyframes */ }
-
-/* Утилки Tailwind base-override */
-@layer base {
-  * { @apply border-border; }
-  body { @apply bg-background text-foreground; }
+.cyber-nav-item::before{
+  content:""; position:absolute; inset:0; left:-100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.1), transparent);
+  transition: all .5s ease;
 }
-
-/* Доп. утилки, что у тебя использовались локально */
-.animate-pulse{ animation: kf-pulse 2s infinite; }
-.bg-neon-glow{
-  background: linear-gradient(90deg, #ff007f, #00f0ff, #c401ff);
-  box-shadow: 0 0 10px #ff007f, 0 0 20px #00f0ff, 0 0 30px #c401ff;
-  border-radius: 9999px;
+.cyber-nav-item:hover::before{ left:100%; }
+.cyber-nav-item:hover{ color: var(--neon-red); text-shadow: 0 0 5px var(--neon-red-glow); }
+.cyber-nav-item.active{
+  background-color: rgba(255,42,109,.2); color: var(--neon-red);
+  text-shadow: 0 0 5px var(--neon-red-glow); box-shadow: 0 0 10px var(--neon-red-glow);
 }
 
-/* Служебные цветовые алиасы для старой разметки:
-   где было .neon-border-blue / .cyber-divider-purple и т.д.
-   Просто добавляй нужную тему рядом:
-   <div class="neon-border theme-blue"> ... </div>
-*/
+/* =========================================================
+   11) ДРУГОЕ
+   ========================================================= */
+/* Вспомогательные классы для частиц с цветами */
+.cyber-particle.bg-neon-blue  { background-color: var(--neon-blue)  }
+.cyber-particle.bg-neon-red   { background-color: var(--neon-red)   }
+.cyber-particle.bg-neon-purple{ background-color: var(--neon-purple)}
+.cyber-particle.bg-neon-yellow{ background-color: var(--neon-yellow)}
+.cyber-particle.bg-neon-green { background-color: var(--neon-green) }
