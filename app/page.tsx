@@ -16,21 +16,18 @@ import {
   Package,
   Moon,
   Sun,
-  Zap,
-  Shield,
   Wifi,
   Server,
   Code,
-  Database,
   Flame,
   Award,
-  Sparkles,
-  CpuIcon,
   Joystick,
+  SteeringWheel,
+  Vr as VrIcon, // если нет в lucide-react, замени на Headphones или Sparkles
 } from "lucide-react"
 
 export default function Home() {
-  // ===== ТАРИФЫ (обновлено: Standart PRO удалён, характеристики обновлены, добавлены количества ПК) =====
+  // ===== ТАРИФЫ (актуальные характеристики и количества) =====
   const pricingTiers = [
     {
       name: "Standart",
@@ -42,7 +39,6 @@ export default function Home() {
       color: "red",
       count: 25,
       icon: <Monitor className="h-5 w-5" />,
-      // обновлено по ТЗ
       features: ["240Hz Монитор", "RTX 4060 8GB", "16GB RAM", "i5-12400F"],
     },
     {
@@ -54,8 +50,7 @@ export default function Home() {
       day: "3500тг/день",
       color: "purple",
       count: 30,
-      icon: <Shield className="h-5 w-5" />,
-      // обновлено GPU
+      icon: <Code className="h-5 w-5" />,
       features: ["280Hz Монитор", "RTX 5060 8GB", "16GB RAM", "i5-13400F"],
     },
     {
@@ -68,7 +63,6 @@ export default function Home() {
       color: "yellow",
       count: 6,
       icon: <Wifi className="h-5 w-5" />,
-      // обновлено CPU/GPU/RAM
       features: ["380Hz Монитор", "RTX 4070 Super 12GB", "32GB RAM", "i7-13700F"],
     },
     {
@@ -81,30 +75,11 @@ export default function Home() {
       color: "green",
       count: 5,
       icon: <Server className="h-5 w-5" />,
-      // обновлено CPU/GPU/RAM
       features: ["540Hz Монитор", "RTX 5070", "32GB RAM 6000MHz", "Ryzen 7 7800X3D"],
     },
   ]
 
-  // ===== PlayStation =====
-  const playstationZones = [
-    {
-      size: "65 дюймов",
-      hourly: "1200тг/час",
-      package1: "2400тг/2+1",
-      package2: "3600тг/3+2",
-      features: ["4K HDR", "DualSense", "PS5 Pro", "FIFA 25", "Все популярные игры"],
-    },
-    {
-      size: "75 дюймов",
-      hourly: "1500тг/час",
-      package1: "3000тг/2+1",
-      package2: "4500тг/3+2",
-      features: ["4K HDR+", "DualSense Pro", "PS5", "Все игры", "Премиум звук"],
-    },
-  ]
-
-  // ===== ПК-конфиги (обновлено: удалён Standart PRO, обновлены железо и RAM) =====
+  // ===== ПК-конфиги (актуальные) =====
   const specsTiers = [
     {
       tier: "Standart",
@@ -148,7 +123,7 @@ export default function Home() {
     },
   ]
 
-  // ===== Периферия (удалён блок Standart PRO) =====
+  // ===== Периферия =====
   const devicesTiers = [
     {
       tier: "Standart",
@@ -188,34 +163,32 @@ export default function Home() {
     },
   ]
 
-  const benefits = [
+  // ===== F16 EXTRA — карточки зон (без цен — не задавались) =====
+  const extraZones = [
     {
-      title: "Высокая производительность",
-      description: "Мощные игровые ПК с новейшими видеокартами и процессорами",
-      icon: <CpuIcon className="h-6 w-6 text-neon-blue" />,
-      color: "blue",
-    },
-    {
-      title: "Комфортная атмосфера",
-      description: "Эргономичные кресла и современный дизайн помещения",
-      icon: <Sparkles className="h-6 w-6 text-neon-purple" />,
-      color: "purple",
-    },
-    {
-      title: "Высокоскоростной интернет",
-      description: "Стабильное подключение со скоростью до 1 Гбит/с",
-      icon: <Wifi className="h-6 w-6 text-neon-green" />,
+      name: "SimRacing",
       color: "green",
+      icon: <SteeringWheel className="h-5 w-5" />,
+      bullets: ["Руль, педали, кресло-ковш", "VR-ready", "Assetto Corsa / iRacing / WRC"],
+      cta: "ЗАБРОНИРОВАТЬ SIMRACING",
     },
     {
-      title: "Профессиональные периферийные устройства",
-      description: "Игровые мыши, клавиатуры и наушники высокого класса",
-      icon: <Joystick className="h-6 w-6 text-neon-red" />,
-      color: "red",
+      name: "VR",
+      color: "blue",
+      icon: <Joystick className="h-5 w-5" />,
+      bullets: ["VR-квесты и аркады", "Подходит для компании", "Запись клипов и фото"],
+      cta: "ЗАБРОНИРОВАТЬ VR",
+    },
+    {
+      name: "PlayStation 5",
+      color: "purple",
+      icon: <Gamepad2 className="h-5 w-5" />,
+      bullets: ['Экраны 65" и 75"', "PS5 / PS5 Pro", "FIFA 25 и топовые игры"],
+      cta: "ЗАБРОНИРОВАТЬ PS5",
     },
   ]
 
-  // фоновые частицы (как было)
+  // фоновые частицы
   const particles = Array.from({ length: 50 }, (_, i) => ({
     id: i,
     size: Math.random() * 3 + 1,
@@ -228,7 +201,6 @@ export default function Home() {
 
   const [selectedImage, setSelectedImage] = useState<{ src: string; alt: string; title: string } | null>(null)
 
-  // helper цвета (без Standart PRO)
   const colorOf = (tierName: string) => {
     if (tierName.includes("Standart") && !tierName.includes("Premium")) return "red"
     if (tierName.includes("Standart Premium")) return "purple"
@@ -290,7 +262,8 @@ export default function Home() {
               <li><Link href="#" className="cyber-nav-item active">ГЛАВНАЯ</Link></li>
               <li><Link href="#pricing" className="cyber-nav-item">ТАРИФЫ</Link></li>
               <li><Link href="#equipment" className="cyber-nav-item">ОБОРУДОВАНИЕ</Link></li>
-              <li><Link href="#gallery" className="cyber-nav-item">ГАЛЕРЕЯ</Link></li>
+              <li><Link href="#extra" className="cyber-nav-item">F16 EXTRA</Link></li>
+              <li><Link href="#progress" className="cyber-nav-item">DISCOUNTS</Link></li>
               <li><Link href="#contact" className="cyber-nav-item">КОНТАКТЫ</Link></li>
             </ul>
           </nav>
@@ -318,7 +291,7 @@ export default function Home() {
 
             <div className="flex flex-wrap gap-4">
               <a
-                href="https://api.whatsapp.com/send/?phone=77080161720&text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%0A%0A%D0%9F%D0%B8%D1%88%D1%83+%D0%B8%D0%B7+%D0%BF%D1%80%D0%B8%D0%BB%D0%BE%D0%B6%D0%B5%D0%BD%D0%B8%D1%8F+2%D0%93%D0%98%D0%A1.%0A%0A&type=phone_number&app_absent=0"
+                href="https://api.whatsapp.com/send/?phone=77080161720&text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%0A%0A%D0%9F%D0%B8%D1%88%D1%83+%D0%B8%D0%B7+2GIS&type=phone_number&app_absent=0"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -357,27 +330,6 @@ export default function Home() {
           <div className="absolute top-1/2 left-2/3 w-2 h-2 rounded-full bg-neon-purple animate-pulse"></div>
           <div className="absolute top-1/3 left-3/4 w-2 h-2 rounded-full bg-neon-yellow animate-pulse"></div>
           <div className="absolute top-2/3 left-1/4 w-2 h-2 rounded-full bg-neon-green animate-pulse"></div>
-        </div>
-      </section>
-
-      {/* Преимущества */}
-      <section className="py-16 bg-darker-bg/90 backdrop-blur-sm">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {benefits.map((b, i) => (
-              <div
-                key={i}
-                className={`bg-darker-bg/80 backdrop-blur-sm border border-neon-${b.color} rounded-lg overflow-hidden fade-in`}
-                style={{ animationDelay: `${i * 0.2}s` }}
-              >
-                <div className="p-6 h-full flex flex-col items-center text-center">
-                  <div className={`mb-4 p-3 rounded-full bg-darker-bg border border-neon-${b.color}`}>{b.icon}</div>
-                  <h3 className={`text-xl font-orbitron font-bold mb-3 neon-${b.color}`}>{b.title}</h3>
-                  <p className="text-muted-color">{b.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
@@ -450,7 +402,7 @@ export default function Home() {
                     </div>
                   </div>
 
-                  <a href="https://api.whatsapp.com/send/?phone=77080161720&text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%0A%0A%D0%9F%D0%B8%D1%88%D1%83+%D0%B8%D0%B7+%D0%BF%D1%80%D0%B8%D0%BB%D0%BE%D0%B6%D0%B5%D0%BD%D0%B8%D1%8F+2%D0%93%D0%98%D0%A1.%0A%0A&type=phone_number&app_absent=0">
+                  <a href="https://api.whatsapp.com/send/?phone=77080161720&text=%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%B1%D1%80%D0%BE%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D1%82%D1%8C%20%D0%BF%D0%BA&type=phone_number&app_absent=0">
                     <button className={`cyber-button cyber-button-${tier.color} w-full`}>ВЫБРАТЬ</button>
                   </a>
                 </div>
@@ -460,80 +412,15 @@ export default function Home() {
         </div>
       </section>
 
-      {/* PlayStation */}
-      <section className="py-20 bg-darker-bg cyber-grid">
-        <div className="container mx-auto px-4">
-          <div className="mb-12">
-            <h2 className="cyber-heading cyber-heading-purple text-3xl md:text-4xl font-orbitron font-bold mb-4 cyber-title">
-              PLAYSTATION ЗОНА
-            </h2>
-            <p className="text-muted-color max-w-2xl ml-4">Играй на PlayStation 5 на больших экранах с друзьями</p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-8">
-            {playstationZones.map((zone, index) => (
-              <div
-                key={zone.size}
-                className="cyber-card-3d cyber-card-purple fade-in hologram cyber-frame"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                <div className="p-6">
-                  <div className="flex items-center mb-4">
-                    <Gamepad2 className="h-5 w-5 mr-2 text-neon-purple" />
-                    <h3 className="text-xl font-orbitron font-bold neon-purple">{zone.size}</h3>
-                  </div>
-
-                  <div className="space-y-4 mb-6">
-                    <div className="text-2xl font-bold neon-purple font-orbitron">{zone.hourly}</div>
-                    <div className="cyber-divider-purple"></div>
-                    <div className="space-y-2">
-                      <div className="flex items-center justify-between">
-                        <span className="text-muted-color flex items-center">
-                          <Package className="h-4 w-4 mr-1 opacity-70" /> Пакет 2+1:
-                        </span>
-                        <span>{zone.package1}</span>
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <span className="text-muted-color flex items-center">
-                          <Package className="h-4 w-4 mr-1 opacity-70" /> Пакет 3+2:
-                        </span>
-                        <span>{zone.package2}</span>
-                      </div>
-                    </div>
-
-                    <div className="mt-4 pt-4 border-t border-border-color">
-                      <h4 className="text-sm font-orbitron mb-2 text-muted-color">Особенности:</h4>
-                      <ul className="grid grid-cols-2 gap-2">
-                        {zone.features.map((feature, idx) => (
-                          <li key={idx} className="flex items-center text-sm">
-                            <span className="h-1.5 w-1.5 bg-neon-purple rounded-full mr-2"></span>
-                            {feature}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-
-                  <a href="https://api.whatsapp.com/send/?phone=77080161720&text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%0A%0A%D0%9F%D0%B8%D1%88%D1%83+%D0%B8%D0%B7+%D0%BF%D1%80%D0%B8%D0%BB%D0%BE%D0%B6%D0%B5%D0%BD%D0%B8%D1%8F+2%D0%93%D0%98%D0%A1.%0A%0A&type=phone_number&app_absent=0">
-                    <button className="cyber-button-3d-purple w-full">ЗАБРОНИРОВАТЬ PLAYSTATION</button>
-                  </a>
-                </div>
-              </div>
-            ))}
-          </div>
-          <p className="text-center neon-purple font-orbitron font-bold cyber-text">2x 65-ДЮЙМОВЫХ И 2x 75-ДЮЙМОВЫХ ТЕЛЕВИЗОРА</p>
-        </div>
-      </section>
-
       {/* Оборудование и устройства */}
       <section id="equipment" className="py-20 cyber-mesh">
         <div className="container mx-auto px-4">
           <div className="mb-12">
-            <h2 className="cyber-heading text-2xl md:text-4xl font-orbitron font-bold mb-4 cyber-title text-center md:text-left">
+            <h2 className="cyber-heading text-2xl md:text-4xl font-orbitron font-bold mb-4 cyber-title">
               ОБОРУДОВАНИЕ И УСТРОЙСТВА
             </h2>
-            <p className="text-muted-color max-w-2xl mx-auto md:ml-4 text-center md:text-left">
-              Ознакомься с конфигурациями техники и периферии каждой зоны
+            <p className="text-muted-color max-w-2xl ml-1">
+              Конфигурации техники и периферии по зонам
             </p>
           </div>
 
@@ -549,13 +436,13 @@ export default function Home() {
                   style={{ animationDelay: `${index * 0.1}s` }}
                 >
                   <div className="p-4 md:p-6 h-full flex flex-col">
-                    {/* Заголовок */}
                     <div className="flex justify-between items-start mb-4">
                       <h3 className={`text-lg md:text-xl font-orbitron font-bold neon-${color}`}>{spec.tier}</h3>
-                      <span className="text-xs bg-darker-bg px-2 py-1 border border-border-color cyber-frame">{spec.count} ПК</span>
+                      <span className="text-xs bg-darker-bg px-2 py-1 border border-border-color cyber-frame">
+                        {spec.count} ПК
+                      </span>
                     </div>
 
-                    {/* Особенности */}
                     <div className="space-y-4 mb-6 flex-grow">
                       <div className={`cyber-divider-${color}`}></div>
 
@@ -577,7 +464,6 @@ export default function Home() {
                           <span className="text-white">{spec.monitor}</span>
                         </div>
 
-                        {/* Периферия */}
                         {device && (
                           <>
                             <div className="flex items-center space-x-2">
@@ -597,12 +483,11 @@ export default function Home() {
                       </div>
                     </div>
 
-                    {/* Кнопка */}
-                    <a href="https://api.whatsapp.com/send/?phone=77080161720&text=Здравствуйте! Пишу по поводу выбора зоны&type=phone_number&app_absent=0">
+                    <a href="https://api.whatsapp.com/send/?phone=77080161720&text=Здравствуйте!%20Пишу%20по%20поводу%20выбора%20зоны&type=phone_number&app_absent=0">
                       <button
                         className={`cyber-button cyber-button-${color} w-full`}
-                        // @ts-ignore — inline var для кастомного свечения
-                        style={{ "--neon-color": `var(--neon-${color})` }}
+                        // @ts-ignore inline var для свечения
+                        style={{ "--neon-color": `var(--neon-${color})` } as any}
                       >
                         ВЫБРАТЬ
                       </button>
@@ -615,57 +500,48 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Галерея (без изменений данных) */}
-      <section id="gallery" className="py-20 cyber-mesh">
+      {/* ====== РАЗДЕЛИТЕЛЬ И F16 EXTRA ====== */}
+      <section id="extra" className="py-8">
         <div className="container mx-auto px-4">
-          <div className="mb-12">
-            <h2 className="cyber-heading text-3xl md:text-4xl font-orbitron font-bold mb-4 cyber-title">КИБЕР ГАЛЕРЕЯ</h2>
-            <p className="text-muted-color max-w-2xl ml-4">Взгляни на наши игровые зоны и оборудование</p>
+          {/* Разделительная полоса с центровым текстом */}
+          <div className="relative my-6 md:my-10">
+            <div className="h-px w-full bg-gradient-to-r from-transparent via-neon-purple to-transparent opacity-60"></div>
+            <div className="absolute inset-0 flex items-center justify-center">
+              <span className="px-4 py-1 bg-black/70 border border-neon-purple rounded font-orbitron text-lg md:text-2xl neon-purple">
+                F16 EXTRA
+              </span>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-4">
-            {[
-              { src: "https://i.postimg.cc/xTt25LXt/DSCF3464.png", alt: "Игровая зона F16 Arena", title: "", color: "red" },
-              { src: "https://i.postimg.cc/BQq32mnj/DSCF3471.png", alt: "Игровые компьютеры F16 Arena", title: "", color: "blue" },
-              { src: "https://i.postimg.cc/d0TcJX4x/DSCF3476.png", alt: "Игровое пространство F16 Arena", title: "", color: "purple" },
-              { src: "https://i.postimg.cc/1XBLWZ3f/DSCF3521.png", alt: "VIP зона F16 Arena", title: "", color: "yellow" },
-              { src: "https://i.postimg.cc/sgqbHms9/DSCF3525.png", alt: "PRO зона F16 Arena", title: "", color: "green" },
-              { src: "https://i.postimg.cc/gkMC8d77/DSCF3528.png", alt: "Игровые станции F16 Arena", title: "", color: "red" },
-              { src: "https://i.postimg.cc/66cgxtBQ/DSCF3530.png", alt: "Компьютерное оборудование F16 Arena", title: "", color: "blue" },
-              { src: "https://i.postimg.cc/JzS43jFS/DSCF3532.png", alt: "RGB подсветка F16 Arena", title: "", color: "purple" },
-              { src: "https://i.postimg.cc/FsB9mjh1/DSCF3533.png", alt: "Игровая атмосфера F16 Arena", title: "", color: "yellow" },
-            ].map((item, index) => (
+          <p className="text-muted-color text-center max-w-2xl mx-auto mb-10">
+            Отдельные зоны развлечений: симрейсинг, VR и PlayStation&nbsp;5.
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {extraZones.map((z, i) => (
               <div
-                key={index}
-                className="relative group overflow-hidden aspect-video fade-in cursor-pointer"
-                style={{ animationDelay: `${index * 0.1}s` }}
-                onClick={() => setSelectedImage(item)}
+                key={z.name}
+                className={`bg-darker-bg/80 backdrop-blur-sm border border-neon-${z.color} rounded-lg overflow-hidden cyber-card-3d hologram fade-in`}
+                style={{ animationDelay: `${0.1 * i}s` }}
               >
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"></div>
+                <div className="p-6 h-full flex flex-col">
+                  <div className="flex items-center mb-4">
+                    <div className={`mr-2 text-neon-${z.color}`}>{z.icon}</div>
+                    <h3 className={`text-xl font-orbitron font-bold neon-${z.color}`}>{z.name}</h3>
+                  </div>
 
-                <div className="absolute inset-0 border-2 border-transparent group-hover:border-neon-blue transition-all duration-300 z-20 overflow-hidden">
-                  <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-neon-blue opacity-0 group-hover:opacity-100 transition-all duration-300 transform -translate-x-full -translate-y-full group-hover:translate-x-0 group-hover:translate-y-0"></div>
-                  <div className="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-neon-red opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-full -translate-y-full group-hover:translate-x-0 group-hover:translate-y-0"></div>
-                  <div className="absolute bottom-0 left-0 w-8 h-8 border-b-2 border-l-2 border-neon-green opacity-0 group-hover:opacity-100 transition-all duration-300 transform -translate-x-full translate-y-full group-hover:translate-x-0 group-hover:translate-y-0"></div>
-                  <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-neon-purple opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-full translate-y-full group-hover:translate-x-0 group-hover:translate-y-0"></div>
-                </div>
+                  <ul className="space-y-2 mb-6 flex-grow">
+                    {z.bullets.map((b, idx) => (
+                      <li key={idx} className="flex items-start text-sm">
+                        <span className={`mt-1 h-1.5 w-1.5 rounded-full bg-neon-${z.color} mr-2`}></span>
+                        {b}
+                      </li>
+                    ))}
+                  </ul>
 
-                <Image
-                  src={item.src || "/placeholder.svg"}
-                  alt={item.alt}
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-110 brightness-75 group-hover:brightness-100"
-                  loading="lazy"
-                />
-
-                <div className="absolute bottom-0 left-0 right-0 p-4 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300 z-20">
-                  <h3 className={`text-lg font-orbitron font-bold neon-${item.color} text-shadow-lg`}>{item.title}</h3>
-                </div>
-
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20">
-                  <span className="px-4 py-2 bg-darker-bg/80 backdrop-blur-sm border border-neon-blue rounded text-sm font-orbitron text-white">
-                    Нажмите для просмотра
-                  </span>
+                  <a href="https://api.whatsapp.com/send/?phone=77080161720&text=Здравствуйте!%20Бронь%20зоны%20F16%20Extra&type=phone_number&app_absent=0">
+                    <button className={`cyber-button cyber-button-${z.color} w-full`}>{z.cta}</button>
+                  </a>
                 </div>
               </div>
             ))}
@@ -673,7 +549,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Прокачка уровня */}
+      {/* Level Up Discounts */}
       <section id="progress" className="py-20 bg-black/30 backdrop-blur-sm cyber-grid">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 font-orbitron glitch" data-text="Level Up Discounts">
@@ -805,7 +681,9 @@ export default function Home() {
             </div>
             <div className="text-center">
               <div className="cyber-divider-blue mb-4 md:mb-6"></div>
-              <p className="text-base md:text-lg neon-blue font-orbitron font-bold cyber-glitch-text">F16 ARENA: 65 ПК И PLAYSTATION ЗОНЫ ЖДУТ ВАС!</p>
+              <p className="text-base md:text-lg neon-blue font-orbitron font-bold cyber-glitch-text">
+                F16 ARENA: 65 ПК И ЗОНЫ F16 EXTRA ЖДУТ ВАС!
+              </p>
             </div>
           </div>
         </div>
@@ -835,7 +713,7 @@ export default function Home() {
             <div className="mb-4 md:mb-0 flex items-center">
               <div className="mr-4 font-orbitron font-bold text-xl neon-red cyber-glitch-text">F16 ARENA</div>
               <div>
-                <a href="mailto:info@f16arena.kz" className="hover:text-neon-blue transition-colors mr-4">
+                <a href="mailto:f16arena@gmail.com" className="hover:text-neon-blue transition-colors mr-4">
                   f16arena@gmail.com
                 </a>
                 <a href="tel:+77080161720" className="hover:text-neon-blue transition-colors">
@@ -861,7 +739,7 @@ export default function Home() {
         </div>
       </footer>
 
-      {/* Модалка галереи */}
+      {/* Модалка (оставлена под будущие клики из Hero/Extra) */}
       {selectedImage && (
         <div
           className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-4 backdrop-blur-md"
