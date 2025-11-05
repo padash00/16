@@ -22,8 +22,7 @@ import {
   Flame,
   Award,
   Joystick,
-  SteeringWheel,
-  Vr as VrIcon, // если нет в lucide-react, замени на Headphones или Sparkles
+  Headset, // используем как VR-иконку, стабильна во всех версиях lucide-react
 } from "lucide-react"
 
 export default function Home() {
@@ -77,7 +76,7 @@ export default function Home() {
       icon: <Server className="h-5 w-5" />,
       features: ["540Hz Монитор", "RTX 5070", "32GB RAM 6000MHz", "Ryzen 7 7800X3D"],
     },
-  ]
+  ] as const
 
   // ===== ПК-конфиги (актуальные) =====
   const specsTiers = [
@@ -121,7 +120,7 @@ export default function Home() {
       icon: <Award className="h-5 w-5" />,
       count: 5,
     },
-  ]
+  ] as const
 
   // ===== Периферия =====
   const devicesTiers = [
@@ -161,21 +160,22 @@ export default function Home() {
       ],
       color: "green",
     },
-  ]
+  ] as const
 
   // ===== F16 EXTRA — карточки зон (без цен — не задавались) =====
   const extraZones = [
     {
       name: "SimRacing",
       color: "green",
-      icon: <SteeringWheel className="h-5 w-5" />,
+      // SteeringWheel есть не во всех версиях lucide-react. Чтобы не ловить ERESOLVE — используем Joystick.
+      icon: <Joystick className="h-5 w-5" />,
       bullets: ["Руль, педали, кресло-ковш", "VR-ready", "Assetto Corsa / iRacing / WRC"],
       cta: "ЗАБРОНИРОВАТЬ SIMRACING",
     },
     {
       name: "VR",
       color: "blue",
-      icon: <Joystick className="h-5 w-5" />,
+      icon: <Headset className="h-5 w-5" />, // стабильная VR-иконка
       bullets: ["VR-квесты и аркады", "Подходит для компании", "Запись клипов и фото"],
       cta: "ЗАБРОНИРОВАТЬ VR",
     },
@@ -186,7 +186,7 @@ export default function Home() {
       bullets: ['Экраны 65" и 75"', "PS5 / PS5 Pro", "FIFA 25 и топовые игры"],
       cta: "ЗАБРОНИРОВАТЬ PS5",
     },
-  ]
+  ] as const
 
   // фоновые частицы
   const particles = Array.from({ length: 50 }, (_, i) => ({
@@ -199,7 +199,11 @@ export default function Home() {
     color: ["neon-blue", "neon-red", "neon-purple", "neon-yellow", "neon-green"][Math.floor(Math.random() * 5)],
   }))
 
-  const [selectedImage, setSelectedImage] = useState<{ src: string; alt: string; title: string } | null>(null)
+  const [selectedImage, setSelectedImage] = useState<{
+    src: string
+    alt: string
+    title: string
+  } | null>(null)
 
   const colorOf = (tierName: string) => {
     if (tierName.includes("Standart") && !tierName.includes("Premium")) return "red"
@@ -265,6 +269,7 @@ export default function Home() {
               <li><Link href="#extra" className="cyber-nav-item">F16 EXTRA</Link></li>
               <li><Link href="#progress" className="cyber-nav-item">DISCOUNTS</Link></li>
               <li><Link href="#contact" className="cyber-nav-item">КОНТАКТЫ</Link></li>
+              <li><Link href="#map" className="cyber-nav-item">КАРТА</Link></li>
             </ul>
           </nav>
         </div>
@@ -690,7 +695,7 @@ export default function Home() {
       </section>
 
       {/* Карта */}
-      <section className="py-10">
+      <section id="map" className="py-10">
         <div className="container mx-auto px-4">
           <div className="rounded overflow-hidden cyber-card-3d no-hover cyber-frame">
             <iframe
