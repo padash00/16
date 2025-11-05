@@ -30,10 +30,10 @@ export default function Home() {
   const pricingTiers = [
     {
       name: "Standart",
-      hourly: "700тг/час",
-      package1: "1200тг/2+1",
-      package2: "1800тг/3+2",
-      night: "2200тг/ночь",
+      hourly: "900тг/час",
+      package1: "1800тг/2+1",
+      package2: "2700тг/3+2",
+      night: "3000тг/ночь",
       day: "1500тг/день",
       color: "red",
       count: 25,
@@ -43,10 +43,10 @@ export default function Home() {
     {
       name: "Standart Premium",
       hourly: "1200тг/час",
-      package1: "2000тг/2+1",
-      package2: "3000тг/3+2",
-      night: "4000тг/ночь",
-      day: "3500тг/день",
+      package1: "2400тг/2+1",
+      package2: "3600тг/3+2",
+      night: "4500тг/ночь",
+      day: "2500тг/день",
       color: "purple",
       count: 30,
       icon: <Code className="h-5 w-5" />,
@@ -55,8 +55,8 @@ export default function Home() {
     {
       name: "VIP",
       hourly: "1400тг/час",
-      package1: "2600тг/2+1",
-      package2: "3900тг/3+2",
+      package1: "2800тг/2+1",
+      package2: "3200тг/3+2",
       night: "4500тг/ночь",
       day: "Нет дневного пакета",
       color: "yellow",
@@ -67,9 +67,9 @@ export default function Home() {
     {
       name: "PRO",
       hourly: "1800тг/час",
-      package1: "3200тг/2+1",
-      package2: "4800тг/3+2",
-      night: "5500тг/ночь",
+      package1: "3600тг/2+1",
+      package2: "5400тг/3+2",
+      night: "5800тг/ночь",
       day: "Нет дневного пакета",
       color: "green",
       count: 5,
@@ -127,8 +127,8 @@ export default function Home() {
     {
       tier: "Standart",
       devices: [
-        { type: "Мышь", name: "Attack Shark X3 (Wireless)", icon: <Mouse className="h-5 w-5" /> },
-        { type: "Клавиатура", name: "Rapoo V500 PRO", icon: <Keyboard className="h-5 w-5" /> },
+        { type: "Мышь", name: "Asus ROG )", icon: <Mouse className="h-5 w-5" /> },
+        { type: "Клавиатура", name: "RK ROYAL KLUDGE 87", icon: <Keyboard className="h-5 w-5" /> },
         { type: "Наушники", name: "HyperX Cloud 2", icon: <Headphones className="h-5 w-5" /> },
       ],
       color: "red",
@@ -145,9 +145,9 @@ export default function Home() {
     {
       tier: "VIP",
       devices: [
-        { type: "Мышь", name: "Logitech G PRO (Wireless)", icon: <Mouse className="h-5 w-5" /> },
+        { type: "Мышь", name: "Logitech SuperLight  (Wireless)", icon: <Mouse className="h-5 w-5" /> },
         { type: "Клавиатура", name: "Dark Project", icon: <Keyboard className="h-5 w-5" /> },
-        { type: "Наушники", name: "HyperX Cloud Alpha 2", icon: <Headphones className="h-5 w-5" /> },
+        { type: "Наушники", name: "Logitech G PRO SE", icon: <Headphones className="h-5 w-5" /> },
       ],
       color: "yellow",
     },
