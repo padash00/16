@@ -390,3 +390,14 @@ section>.container, header>.container, footer>.container{position:relative;z-ind
 .cyber-particle.bg-neon-purple{background-color:var(--neon-purple)}
 .cyber-particle.bg-neon-yellow{background-color:var(--neon-yellow)}
 .cyber-particle.bg-neon-green{background-color:var(--neon-green)}
+/* =========================================================
+   FIX: Поверх всех фонов и оверлеев
+   ========================================================= */
+section, header, footer, main {
+  position: relative;
+  z-index: 5;
+}
+section > .container, header > .container, footer > .container {
+  position: relative;
+  z-index: 10;
+}
