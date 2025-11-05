@@ -50,7 +50,7 @@ export default function Home() {
       color: "purple",
       count: 30,
       icon: <Code className="h-5 w-5" />,
-      features: ["280Hz Монитор", "RTX 5060 8GB", "16GB RAM", "i5-13400F"],
+      features: ["280Hz Монитор", "RTX 5060 8GB", "32GB RAM", "i5-13400F"],
     },
     {
       name: "VIP",
@@ -571,7 +571,7 @@ export default function Home() {
                 </svg>
               </div>
               <h3 className="text-xl font-bold mb-4 font-orbitron neon-blue">Silver</h3>
-              <p className="text-gray-300 mb-2">Потрать более 60 000 ₸</p>
+              <p className="text-gray-300 mb-2">Потрать более 100 000 ₸</p>
               <p className="text-2xl font-bold neon-blue">-10%</p>
             </div>
 
@@ -583,7 +583,7 @@ export default function Home() {
                 </svg>
               </div>
               <h3 className="text-xl font-bold mb-4 font-orbitron neon-yellow">Gold</h3>
-              <p className="text-gray-300 mb-2">Потрать более 80 000 ₸</p>
+              <p className="text-gray-300 mb-2">Потрать более 120 000 ₸</p>
               <p className="text-2xl font-bold neon-yellow">-20%</p>
             </div>
 
@@ -687,7 +687,7 @@ export default function Home() {
             <div className="text-center">
               <div className="cyber-divider-blue mb-4 md:mb-6"></div>
               <p className="text-base md:text-lg neon-blue font-orbitron font-bold cyber-glitch-text">
-                F16 ARENA: 65 ПК И ЗОНЫ F16 EXTRA ЖДУТ ВАС!
+                F16 ARENA: 66 ПК И ЗОНЫ F16 EXTRA ЖДУТ ВАС!
               </p>
             </div>
           </div>
