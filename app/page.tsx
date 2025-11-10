@@ -66,7 +66,7 @@ export default function Home() {
       name: "VIP",
       hourly: "1400тг/час",
       package1: "2800тг/2+1",
-      package2: "3200тг/3+2",
+      package2: "4200тг/3+2",
       night: "4500тг/ночь",
       day: "Нет дневного пакета",
       color: "yellow" as NeonKey,
